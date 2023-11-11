@@ -14,7 +14,7 @@ Hm music box后端代码
 
 ## 连接数据库
 
-在`src/main/resources/application.yaml`中配置本地数据库密码，然后运行代码，访问http://localhost:8080/test，如果有返回值则说明正常配置。
+在`src/main/resources/application.yaml`中配置本地数据库密码，在postgres中建立名为hm_music_box的database，然后运行代码，访问http://localhost:8080/test，如果有返回值则说明正常配置。
 
 ## 添加依赖
 
