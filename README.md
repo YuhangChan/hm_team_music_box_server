@@ -2,19 +2,17 @@
 
 Hm music box后端代码
 
-## push说明
-
-由于现在使用的是本地数据库，不要将`src/main/resources/application.yaml`一并push
-
 ## 配置说明
 
 - Java版本17
 - Spring Boot版本3.1.5
 - 数据库使用Postgres
 
-## 连接数据库
+## 部署说明
 
-在`src/main/resources/application.yaml`中配置本地数据库密码，在postgres中建立名为hm_music_box的database，然后运行代码，访问http://localhost:8080/test，如果有返回值则说明正常配置。
+部署在阿里云服务器上，ip为47.115.224.143
+
+稍后尝试使用流水线部署
 
 ## 添加依赖
 

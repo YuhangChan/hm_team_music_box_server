@@ -15,10 +15,6 @@ public class TestController {
 
     @GetMapping("/test")
     public MusicVO test() {
-        String name = "Test Name";
-        String album = "Test Album";
-        String singer = "Test Singer";
-        musicService.addMusic(name, album, singer);
         return musicService.getTestMusic();
 
     }
