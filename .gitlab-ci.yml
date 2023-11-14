@@ -17,18 +17,12 @@
 # https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Getting-Started.gitlab-ci.yml
 
 stages:          # List of stages for jobs, and their order of execution
-  - build
   - deploy
-
-build-job:       # This job runs in the build stage, which runs first.
-  stage: build
-  image: maven:3-openjdk-17
-  script:
-    - mvn install -DskipTests
 
 deploy-job:      # This job runs in the deploy stage.
   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
   environment: production
   script:
-    - echo "Deploying application..."
-    - echo "Application successfully deployed."
+    - sshpass -p "Aa123456" scp -o StrictHostKeyChecking=no target/hmmusicbox-0.0.1-SNAPSHOT.jar root@47.115.224.143:~
+    - sshpass -p "Aa123456" ssh -o StrictHostKeyChecking=no root@47.115.224.143 "killall java;screen -d -m java -jar hm_team_music_box_server/hmmusicbox-0.0.1-SNAPSHOT.jar"
+
