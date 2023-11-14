@@ -68,4 +68,5 @@ build_image:
     DOCKER_DRIVER: overlay2
   services:
     - docker:18.09-dind
+  script:
     - docker build -t my-docker-image .
