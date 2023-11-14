@@ -2,14 +2,9 @@ package org.sleepy.hmmusicbox.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.sleepy.hmmusicbox.dao.MusicDao;
-import org.sleepy.hmmusicbox.dao.MusicDetailDao;
-import org.sleepy.hmmusicbox.mapper.MusicDetailMapper;
-import org.sleepy.hmmusicbox.mapper.MusicDetailMapperImpl;
 import org.sleepy.hmmusicbox.mapper.MusicMapper;
 import org.sleepy.hmmusicbox.mapper.MusicMapperImpl;
-import org.sleepy.hmmusicbox.pojo.entity.MusicDetailEntity;
 import org.sleepy.hmmusicbox.pojo.entity.MusicEntity;
-import org.sleepy.hmmusicbox.pojo.vo.music.MusicDetailVO;
 import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
 import org.sleepy.hmmusicbox.service.MusicService;
 import org.springframework.stereotype.Service;
@@ -22,7 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor //用于自动生成带有所有非 final 和非 @NonNull 注解的成员变量的构造函数
 public class MusicServiceImpl implements MusicService {
     private final MusicDao musicDao;
-    private final MusicDetailDao musicDetailDao;
     // TODO: combine two tables together
     @Override
     public void addMusic(String name, String album, String singer) {
@@ -47,19 +41,6 @@ public class MusicServiceImpl implements MusicService {
         }
         // TODO:search
         return list;
-    }
-
-    @Override
-    public MusicDetailVO getMusicDetail(Long id) {
-        MusicDetailMapper mapper = new MusicDetailMapperImpl();
-        return mapper.toMusicDetailVO(musicDetailDao.findById(id).get());
-//        return null;
-    }
-
-    @Override
-    public void addMusicDetail(Long id, String detail, URL imageUrl) {
-        MusicDetailEntity entity = MusicDetailEntity.builder().id(id).detail(detail).imageUrl(imageUrl).build();
-        musicDetailDao.save(entity);
     }
 
 }

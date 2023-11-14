@@ -39,5 +39,4 @@ public class MusicEntity {
     @UpdateTimestamp
     private Date updatedAt;
 
-
 }

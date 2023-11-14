@@ -1,6 +1,5 @@
 package org.sleepy.hmmusicbox.service;
 
-import org.sleepy.hmmusicbox.pojo.vo.music.MusicDetailVO;
 import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
 
 import java.net.URL;
@@ -13,7 +12,5 @@ public interface MusicService {
 
     public List<MusicVO> searchMusic(String name);
 
-    public MusicDetailVO getMusicDetail(Long id);
 
-    public void addMusicDetail(Long id, String detail, URL imageUrl);
 }
