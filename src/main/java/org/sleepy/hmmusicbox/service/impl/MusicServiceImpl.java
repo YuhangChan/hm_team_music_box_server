@@ -23,7 +23,7 @@ import java.util.List;
 public class MusicServiceImpl implements MusicService {
     private final MusicDao musicDao;
     private final MusicDetailDao musicDetailDao;
-
+    // TODO: combine two tables together
     @Override
     public void addMusic(String name, String album, String singer) {
         MusicEntity entity = MusicEntity.builder().name(name).album(album).singer(singer).build();
