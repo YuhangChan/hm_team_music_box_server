@@ -24,7 +24,7 @@ build-job:
   stage: build
   image: maven:3-openjdk-17
   script:
-    - touch ~/.m2
+    - touch ~/.m2/settings.xml
     - |
       cat <<'EOF' > ~/.m2
       <settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
