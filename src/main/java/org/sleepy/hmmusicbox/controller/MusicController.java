@@ -1,7 +1,6 @@
 package org.sleepy.hmmusicbox.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.sleepy.hmmusicbox.pojo.vo.music.MusicDetailVO;
 import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
 import org.sleepy.hmmusicbox.service.MusicService;
 import org.springframework.http.HttpStatus;
