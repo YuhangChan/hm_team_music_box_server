@@ -61,7 +61,7 @@
 #  # container, thanks to volume mount from config.toml
 #  DOCKER_TLS_CERTDIR: "/certs"
 build_image:
-  stage: docker
+  stage: build
   image: docker:18.09
   variables:
     DOCKER_HOST: tcp://docker:2375/
