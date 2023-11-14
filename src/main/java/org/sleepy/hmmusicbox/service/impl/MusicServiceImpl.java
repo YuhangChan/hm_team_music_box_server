@@ -9,7 +9,6 @@ import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
 import org.sleepy.hmmusicbox.service.MusicService;
 import org.springframework.stereotype.Service;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +18,8 @@ public class MusicServiceImpl implements MusicService {
     private final MusicDao musicDao;
     // TODO: combine two tables together
     @Override
-    public void addMusic(String name, String album, String singer) {
-        MusicEntity entity = MusicEntity.builder().name(name).album(album).singer(singer).build();
+    public void addMusic(String name, String album, String singer, String detail, String imageUrl){
+        MusicEntity entity = MusicEntity.builder().name(name).album(album).singer(singer).detail(detail).imageUrl(imageUrl).build();
         musicDao.save(entity);
     }
 

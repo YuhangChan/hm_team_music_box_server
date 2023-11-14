@@ -18,15 +18,9 @@ public class TestController {
         String name = "Test Name";
         String album = "Test Album";
         String singer = "Test Singer";
-        musicService.addMusic(name, album, singer);
-        String name1 = "Test Name1";
-        String album1 = "Test Album1";
-        String singer1 = "Test Singer1";
-        musicService.addMusic(name, album, singer);
-        String name2 = "Test Name2";
-        String album2 = "Test Album2";
-        String singer2 = "Test Singer2";
-        musicService.addMusic(name, album, singer);
+        String detail = "Detail";
+        String imageUrl = "https://news.walkerplus.com/article/157072/903058_615.jpg";
+        musicService.addMusic(name, album, singer, detail, imageUrl);
         return musicService.getTestMusic();
     }
 }

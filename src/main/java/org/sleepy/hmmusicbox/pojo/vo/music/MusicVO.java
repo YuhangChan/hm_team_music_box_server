@@ -2,7 +2,6 @@ package org.sleepy.hmmusicbox.pojo.vo.music;
 
 import lombok.Data;
 
-import java.net.URL;
 
 @Data
 public class MusicVO {
@@ -10,6 +9,6 @@ public class MusicVO {
     private String name;
     private String album;
     private String singer;
-
-
+    private String detail;
+    private String imageUrl;
 }

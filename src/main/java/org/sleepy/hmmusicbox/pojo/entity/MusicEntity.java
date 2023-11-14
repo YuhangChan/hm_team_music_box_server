@@ -33,6 +33,10 @@ public class MusicEntity {
     @NotNull
     private String singer;
 
+    private String detail;
+
+    private String imageUrl;
+
     @CreationTimestamp
     private Date createdAt;
 

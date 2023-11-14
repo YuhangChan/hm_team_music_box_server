@@ -29,7 +29,7 @@ public class MusicController {
     @PostMapping(value = "/music/add", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public void createMusic(@RequestBody MusicVO music) {
-        musicService.addMusic(music.getName(), music.getAlbum(), music.getSinger());
+        musicService.addMusic(music.getName(), music.getAlbum(), music.getSinger(), music.getDetail(), music.getImageUrl());
         // TODO:add music detail with id
     }
 
