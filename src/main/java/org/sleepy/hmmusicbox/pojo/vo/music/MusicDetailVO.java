@@ -9,5 +9,4 @@ public class MusicDetailVO {
     private Long id;
     private String detail;
     private URL imageUrl;
-    // TODO: comment
 }
