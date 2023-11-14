@@ -24,11 +24,11 @@ build-job:
   stage: build
   image: maven:3-openjdk-17
   script:
-    - mvn install -DskipTests=true
-  artifacts:
-    paths:
-    - target/hmmusicbox-0.0.1-SNAPSHOT.jar
-    expire_in: 1 week
+    - cat ${MAVEN_HOME}/conf/settings.xml
+#  artifacts:
+#    paths:
+#    - target/hmmusicbox-0.0.1-SNAPSHOT.jar
+#    expire_in: 1 week
 
 deploy-job:      # This job runs in the deploy stage.
   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
