@@ -6,7 +6,7 @@ COPY pom.xml /music-box
 
 COPY src /music-box/src
 
-RUN mvn install -Dskiptests
+RUN mvn install -DskipTests=true
 
 FROM ictu/sshpass as deploy
 
