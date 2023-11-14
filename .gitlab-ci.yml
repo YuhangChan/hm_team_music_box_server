@@ -21,8 +21,10 @@ stages:          # List of stages for jobs, and their order of execution
 
 deploy-job:      # This job runs in the deploy stage.
   stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
-  image: maven:3-openjdk-17
+  image: ictu/sshpass
   environment: production
   script:
-    - apt install sshpass
+    - ls
+    - sshpass -p "Aa123456" scp -o StrictHostKeyChecking=no target/hmmusicbox-0.0.1-SNAPSHOT.jar root@47.115.224.143:~/hm_team_music_box_server
+    - sshpass -p "Aa123456" ssh -o StrictHostKeyChecking=no root@47.115.224.143 "killall java;screen -d -m java -jar hm_team_music_box_server/hmmusicbox-0.0.1-SNAPSHOT.jar"
 
