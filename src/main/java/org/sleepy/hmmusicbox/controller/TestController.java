@@ -14,7 +14,7 @@ public class TestController {
     private final MusicService musicService;
 
     @GetMapping("/test")
-    public MusicVO test() {
+    public String test() {
 
         String name = "Test Name";
         String album = "Test Album";
@@ -28,6 +28,6 @@ public class TestController {
         String album2 = "Test Album2";
         String singer2 = "Test Singer2";
         musicService.addMusic(name, album, singer);
-        return musicService.getTestMusic();
+        return "hello";
     }
 }
