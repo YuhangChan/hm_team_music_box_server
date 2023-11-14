@@ -25,6 +25,12 @@ deploy-job:      # This job runs in the deploy stage.
   services:
     - name: 'docker:20.10.12-dind'
       command: [ '--tls=false', '--host=tcp://0.0.0.0:2375' ]
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_CERT_PATH: ""
+    DOCKER_TLS_CERTDIR: ""
+    DOCKER_TLS_VERIFY: ""
+    DOCKER_SOCKET_PATH: /var/run/docker.sock
   environment: production
   script:
     - export DOCKER_HOST='tcp://localhost:2375'
