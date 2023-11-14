@@ -126,6 +126,13 @@ Controller中会用到的业务代码
 
 ### controller
 
+MusicController提供的接口：
+
+`@GetMapping("/music/search/{name}")`搜索含有name内容的音乐
+
+`@PostMapping(value = "/music/add", consumes = "application/json")`添加json格式的音乐信息
+
+
 ### exception
 
 专门用于存放自定义的exception

@@ -5,10 +5,9 @@ import lombok.Data;
 import java.net.URL;
 
 @Data
-public class MusicVO {
+public class MusicDetailVO {
     private Long id;
-    private String name;
-    private String album;
-    private String singer;
-
+    private String detail;
+    private URL imageUrl;
+    // TODO: comment
 }

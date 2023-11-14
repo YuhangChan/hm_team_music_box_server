@@ -20,5 +20,6 @@ public class TestController {
         String singer = "Test Singer";
         musicService.addMusic(name, album, singer);
         return musicService.getTestMusic();
+
     }
 }
