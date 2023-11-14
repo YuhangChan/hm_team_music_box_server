@@ -11,12 +11,18 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 @RestController
 @RequiredArgsConstructor
-public class SearchController {
+public class MusicController {
     private final MusicService musicService;
 
     @GetMapping("/music/search/{name}")
     @ResponseStatus(HttpStatus.FOUND)
     public List<MusicVO> searchMusic(@PathVariable("name") String name) {
         return musicService.searchMusic(name);
+    }
+
+    @PostMapping(value = "/music/add", consumes = "application/json")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createMusic(@RequestBody MusicVO music) {
+        musicService.addMusic(music.getName(), music.getAlbum(), music.getSinger());
     }
 }
