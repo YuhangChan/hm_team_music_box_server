@@ -12,6 +12,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -34,7 +35,8 @@ public class UserEntity {
     @NotNull
     private String password;
 
-    @NotNull
+    //TODO:这里的name是否多余？我们不是实名制
+    //@NotNull
     private String name;
 
     @CreationTimestamp
@@ -43,4 +45,24 @@ public class UserEntity {
     @UpdateTimestamp
     private Date updatedAt;
 
+    //注册手机号
+    @NotNull
+    private String phoneNumber;
+
+    //用户头像url
+    private String avatarURL;
+
+    //个人简介（个性签名）
+    private String profile;
+
+    //喜欢的音乐类型
+    private List<String> favoriteMusicGenres;
+
+    //关注的人
+    private List<String> followedArtists;
+
+    //粉丝
+    private List<String> fans;
+
+    //偏好设置（日间/夜间模式、隐私设置）
 }

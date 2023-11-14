@@ -1,0 +1,64 @@
+package org.sleepy.hmmusicbox.service.impl;
+
+import lombok.RequiredArgsConstructor;
+import org.sleepy.hmmusicbox.dao.UserDao;
+import org.sleepy.hmmusicbox.pojo.entity.UserEntity;
+import org.sleepy.hmmusicbox.pojo.vo.user.UserVO;
+import org.sleepy.hmmusicbox.service.UserService;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService {
+    private final UserDao userDao;
+
+    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    @Override
+    public void register(String username, String phoneNumber, String password) {
+        UserEntity user = userDao.findByUsername(username);
+        if (user != null) {
+            throw new RuntimeException("用户名已存在"); //TODO:感觉异常类型之后细化
+        }
+
+
+        //我想实现注册时如果不填url和个性签名，系统默认分配，但是因为接口参数是固定的，无法用方法重载来实现。要么就写两个接口？
+        String encryptedPassword = passwordEncoder.encode(password);
+        userDao.save(UserEntity.builder()
+                .username(username)
+                .phoneNumber(phoneNumber)
+                .password(encryptedPassword)
+                .build());
+
+
+    }
+
+    @Override
+    public void loginByPhone(String phoneNumber, String password) {
+
+    }
+
+    @Override
+    public void loginByName(String username, String password) {
+
+    }
+
+
+    @Override
+    public UserVO findByUserName(String username) {
+        UserEntity user=userDao.findByUsername(username);
+        return UserVO.builder()
+                .username(user.getUsername())
+                .phoneNumber(user.getPhoneNumber())
+                .avatarURL(user.getAvatarURL())
+                .profile(user.getProfile())
+                .build();
+    }
+
+    @Override
+    public void editInfo(String username, String name, String phoneNumber, String avatarURL) {
+
+    }
+}
