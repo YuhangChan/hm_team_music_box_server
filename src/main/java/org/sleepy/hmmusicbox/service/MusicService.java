@@ -1,5 +1,6 @@
 package org.sleepy.hmmusicbox.service;
 
+import org.sleepy.hmmusicbox.pojo.vo.music.MusicDTOVO;
 import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
 
 import java.util.List;
@@ -9,7 +10,7 @@ public interface MusicService {
 
     public MusicVO getTestMusic();
 
-    public List<MusicVO> searchMusic(String name);
+    public List<MusicDTOVO> searchMusic(String name);
 
 
 }

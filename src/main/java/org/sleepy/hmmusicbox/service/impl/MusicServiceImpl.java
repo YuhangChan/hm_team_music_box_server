@@ -2,9 +2,13 @@ package org.sleepy.hmmusicbox.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.sleepy.hmmusicbox.dao.MusicDao;
+import org.sleepy.hmmusicbox.mapper.MusicDTOMapper;
+import org.sleepy.hmmusicbox.mapper.MusicDTOMapperImpl;
 import org.sleepy.hmmusicbox.mapper.MusicMapper;
 import org.sleepy.hmmusicbox.mapper.MusicMapperImpl;
 import org.sleepy.hmmusicbox.pojo.entity.MusicEntity;
+import org.sleepy.hmmusicbox.pojo.entity.MusicEntityDTO;
+import org.sleepy.hmmusicbox.pojo.vo.music.MusicDTOVO;
 import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
 import org.sleepy.hmmusicbox.service.MusicService;
 import org.springframework.stereotype.Service;
@@ -30,16 +34,16 @@ public class MusicServiceImpl implements MusicService {
     }
 
     @Override
-    public List<MusicVO> searchMusic(String name) {
-        MusicMapper mapper = new MusicMapperImpl();
-        List<MusicVO> list = new ArrayList<>();
-        for(MusicEntity entity : musicDao.findAll()) {
-            if(entity.getName().contains(name) || entity.getAlbum().contains(name) || entity.getSinger().contains(name)) {
-                list.add(mapper.toMusicVO(entity));
-            }
+    public List<MusicDTOVO> searchMusic(String name) {
+        MusicDTOMapper mapper = new MusicDTOMapperImpl();
+        List<MusicEntityDTO> searchResult = musicDao.findByKeyword(name);
+        List<MusicDTOVO> list = new ArrayList<>();
+        for (MusicEntityDTO result: searchResult) {
+            list.add(mapper.musicDTOVO(result));
         }
         // TODO:search
         return list;
+//        return null;
     }
 
 }
