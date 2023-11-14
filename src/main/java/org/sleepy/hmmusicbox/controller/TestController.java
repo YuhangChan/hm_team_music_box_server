@@ -28,6 +28,6 @@ public class TestController {
         String album2 = "Test Album2";
         String singer2 = "Test Singer2";
         musicService.addMusic(name, album, singer);
-        return "hello9";
+        return "hello10";
     }
 }
