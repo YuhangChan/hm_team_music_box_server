@@ -16,6 +16,5 @@ public class TestController {
     @GetMapping("/test")
     public MusicVO test() {
         return musicService.getTestMusic();
-
     }
 }
