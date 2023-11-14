@@ -27,4 +27,5 @@ deploy-job:      # This job runs in the deploy stage.
       command: [ '--tls=false', '--host=tcp://0.0.0.0:2375' ]
   environment: production
   script:
+    - export DOCKER_HOST='tcp://localhost:2375'
     - docker build -t music-box:latest .
