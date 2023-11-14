@@ -1,6 +1,7 @@
 package org.sleepy.hmmusicbox.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.sleepy.hmmusicbox.pojo.vo.music.MusicDTOVO;
 import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
 import org.sleepy.hmmusicbox.service.MusicService;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ public class MusicController {
 
     @GetMapping("/music/search/{name}")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<MusicVO> searchMusic(@PathVariable("name") String name) {
+    public List<MusicDTOVO> searchMusic(@PathVariable("name") String name) {
         return musicService.searchMusic(name);
     }
 
@@ -30,7 +31,6 @@ public class MusicController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createMusic(@RequestBody MusicVO music) {
         musicService.addMusic(music.getName(), music.getAlbum(), music.getSinger(), music.getDetail(), music.getImageUrl());
-        // TODO:add music detail with id
     }
 
 }
