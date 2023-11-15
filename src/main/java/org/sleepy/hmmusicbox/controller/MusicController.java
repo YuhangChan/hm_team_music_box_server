@@ -22,11 +22,11 @@ public class MusicController {
         return musicService.searchMusic(name);
     }
 
-//    @GetMapping("music/{id}")
-//    @ResponseStatus(HttpStatus.FOUND)
-//    public MusicDetailVO getMusicDetail(@PathVariable("id") Long id) {
-//        return musicService.getMusicDetail(id);
-//    }
+    @GetMapping("music/{id}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public MusicVO getMusicDetail(@PathVariable("id") Long id) {
+        return musicService.getMusicDetail(id);
+    }
     @PostMapping(value = "/music/add", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public void createMusic(@RequestBody MusicVO music) {

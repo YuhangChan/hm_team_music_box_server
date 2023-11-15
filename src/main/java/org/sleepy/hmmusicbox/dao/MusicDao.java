@@ -12,4 +12,7 @@ public interface MusicDao extends JpaRepository<MusicEntity, Long> {
 
     @Query("SELECT new org.sleepy.hmmusicbox.pojo.entity.MusicEntityDTO(e.name, e.album, e.singer) FROM MusicEntity e WHERE e.name LIKE %:keyword% OR e.album LIKE %:keyword% OR e.singer LIKE %:keyword%")
     List<MusicEntityDTO> findByKeyword(@Param("keyword") String keyword);
+
+    @Query
+    MusicEntity findByIdIs(Long id);
 }

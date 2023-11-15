@@ -41,9 +41,13 @@ public class MusicServiceImpl implements MusicService {
         for (MusicEntityDTO result: searchResult) {
             list.add(mapper.musicDTOVO(result));
         }
-        // TODO:search
         return list;
 //        return null;
+    }
+    @Override
+    public MusicVO getMusicDetail(Long id) {
+        MusicMapper mapper = new MusicMapperImpl();
+        return mapper.toMusicVO(musicDao.findByIdIs(id));
     }
 
 }

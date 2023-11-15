@@ -12,5 +12,7 @@ public interface MusicService {
 
     public List<MusicDTOVO> searchMusic(String name);
 
+    public MusicVO getMusicDetail(Long id);
+
 
 }
