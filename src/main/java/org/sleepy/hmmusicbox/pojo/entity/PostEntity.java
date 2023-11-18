@@ -10,6 +10,7 @@ import lombok.experimental.Accessors;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -35,8 +36,9 @@ public class PostEntity {
     @NotNull
     private Long posterID;
 
-    @OneToMany
-    private List<ReplyEntity> replies;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "post_id")
+    private List<ReplyEntity> replies = new ArrayList<>();
 
     @CreationTimestamp
     private Date createdAt;

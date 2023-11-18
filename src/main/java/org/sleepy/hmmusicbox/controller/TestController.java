@@ -50,7 +50,7 @@ public class TestController {
 
     @GetMapping("/test/post-reply")
     public String testPostReply(){
-        postService.addTestPost();
+        postService.addTestPostReply();
         return "Test Post Reply.";
     }
 }

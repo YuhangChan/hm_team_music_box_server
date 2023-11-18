@@ -24,7 +24,7 @@ public class PostServiceImpl implements PostService {
     public void addTestPostReply() {
         PostEntity postEntity = postDao.findById(1L).get();
         ReplyEntity replyEntity = ReplyEntity.builder().content("Test Content.").replierID(1L).floor(1).build();
-        replyDao.save(replyEntity);
+
         postEntity.getReplies().add(replyEntity);
         postDao.save(postEntity);
     }
