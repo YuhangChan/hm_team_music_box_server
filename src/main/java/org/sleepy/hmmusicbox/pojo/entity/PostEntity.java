@@ -29,6 +29,7 @@ public class PostEntity {
     private String title;
 
     @NotNull
+    @Lob
     private String content;
 
     @NotNull

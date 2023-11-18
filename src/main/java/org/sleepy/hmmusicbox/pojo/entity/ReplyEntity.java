@@ -28,6 +28,7 @@ public class ReplyEntity {
     private Long replierID;
 
     @NotNull
+    @Lob
     private String content;
 
     @NotNull
