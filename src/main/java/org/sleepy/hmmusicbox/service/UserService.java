@@ -6,7 +6,7 @@ public interface UserService {
 
     void loginByPhone(String phoneNumber, String password);
 
-    void loginByName(String username, String password);
+    void loginByUserName(String username, String password);
 
     void register(String username, String phoneNumber,String password);
 
