@@ -10,9 +10,6 @@ import lombok.experimental.Accessors;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.util.Date;
-import java.util.List;
-
 @Entity
 @Table
 @Data
@@ -20,26 +17,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class PostEntity {
+public class ChannelEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
     private String title;
-
-    @NotNull
-    private String content;
-
-    @NotNull
-    private Long posterID;
-
-    @OneToMany
-    private List<ReplyEntity> replies;
-
-    @CreationTimestamp
-    private Date createdAt;
-
-    @UpdateTimestamp
-    private Date updatedAt;
 }

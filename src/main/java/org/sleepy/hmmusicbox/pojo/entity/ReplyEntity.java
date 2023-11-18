@@ -11,7 +11,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table
@@ -20,22 +19,19 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
-public class PostEntity {
+public class ReplyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private String title;
+    private Long replierID;
 
     @NotNull
     private String content;
 
     @NotNull
-    private Long posterID;
-
-    @OneToMany
-    private List<ReplyEntity> replies;
+    private int floor;
 
     @CreationTimestamp
     private Date createdAt;
