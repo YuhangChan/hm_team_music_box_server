@@ -20,9 +20,10 @@ import java.util.List;
 @RequiredArgsConstructor //用于自动生成带有所有非 final 和非 @NonNull 注解的成员变量的构造函数
 public class MusicServiceImpl implements MusicService {
     private final MusicDao musicDao;
+
     // TODO: combine two tables together
     @Override
-    public void addMusic(String name, String album, String singer, String detail, String imageUrl){
+    public void addMusic(String name, String album, String singer, String detail, String imageUrl) {
         MusicEntity entity = MusicEntity.builder().name(name).album(album).singer(singer).detail(detail).imageUrl(imageUrl).build();
         musicDao.save(entity);
     }
@@ -35,18 +36,19 @@ public class MusicServiceImpl implements MusicService {
 
     @Override
     public List<MusicDTOVO> searchMusic(String name) {
-        MusicDTOMapper mapper = new MusicDTOMapperImpl();
+        MusicDTOMapper mapper = MusicDTOMapper.INSTANCE;
         List<MusicEntityDTO> searchResult = musicDao.findByKeyword(name);
         List<MusicDTOVO> list = new ArrayList<>();
-        for (MusicEntityDTO result: searchResult) {
+        for (MusicEntityDTO result : searchResult) {
             list.add(mapper.musicDTOVO(result));
         }
         return list;
 //        return null;
     }
+
     @Override
     public MusicVO getMusicDetail(Long id) {
-        MusicMapper mapper = new MusicMapperImpl();
+        MusicMapper mapper = MusicMapper.INSTANCE;
         return mapper.toMusicVO(musicDao.findByIdIs(id));
     }
 

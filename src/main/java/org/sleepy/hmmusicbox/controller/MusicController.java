@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-//@CrossOrigin(origins = "*", allowCredentials = "true")
 @CrossOrigin(originPatterns = "*", allowCredentials = "true")
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/music")
 public class MusicController {
     private final MusicService musicService;
 
-    @GetMapping("/music/search/{name}")
+    @GetMapping("/search/{name}")
     @ResponseStatus(HttpStatus.FOUND)
     public List<MusicDTOVO> searchMusic(@PathVariable("name") String name) {
         return musicService.searchMusic(name);
     }
 
-    @GetMapping("music/{id}")
+    @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.FOUND)
     public MusicVO getMusicDetail(@PathVariable("id") Long id) {
         return musicService.getMusicDetail(id);
     }
-    @PostMapping(value = "/music/add", consumes = "application/json")
+    @PostMapping(value = "/add", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public void createMusic(@RequestBody MusicVO music) {
         musicService.addMusic(music.getName(), music.getAlbum(), music.getSinger(), music.getDetail(), music.getImageUrl());
