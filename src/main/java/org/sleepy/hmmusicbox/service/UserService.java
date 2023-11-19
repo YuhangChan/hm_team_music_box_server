@@ -12,7 +12,7 @@ public interface UserService {
 
     UserVO findByUserName(String username);
 
-    void editInfo(String username, String name, String phoneNumber, String avatarURL);
+    void editInfo(String username, String name, String phoneNumber, String profile,String avatarURL);
 
     //TODO:获取关注获取粉丝列表？
 }

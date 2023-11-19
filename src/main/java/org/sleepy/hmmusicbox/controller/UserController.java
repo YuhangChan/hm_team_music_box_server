@@ -5,7 +5,10 @@ import cn.dev33.satoken.stp.StpUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.sleepy.hmmusicbox.exception.CommonResponse;
+import org.sleepy.hmmusicbox.pojo.vo.user.EditUserInfoRequest;
 import org.sleepy.hmmusicbox.pojo.vo.user.LoginRequest;
+import org.sleepy.hmmusicbox.pojo.vo.user.RegisterRequest;
+import org.sleepy.hmmusicbox.pojo.vo.user.UserVO;
 import org.sleepy.hmmusicbox.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +32,7 @@ public class UserController {
     @PostMapping("user")
     public CommonResponse<?> register(@Valid @RequestBody RegisterRequest request) {
         // Throws BizException if register failed.
-        userService.register(request.getUsername(), request.getPassword(), request.getName(), request.getIdn(), request.getPhone(), request.getType());
+        userService.register(request.getUsername(), request.getPassword(), request.getPhone());
 
         return CommonResponse.success();
     }
@@ -49,7 +52,7 @@ public class UserController {
     @PutMapping("user")
     public CommonResponse<?> editInfo(@Valid @RequestBody EditUserInfoRequest request) {
         StpUtil.checkLogin();
-        userService.editInfo(StpUtil.getLoginIdAsString(), request.getName(), request.getIdn(), request.getPhone(), request.getType());
+        userService.editInfo(StpUtil.getLoginIdAsString(), request.getUsername(), request.getPhone(), request.getProfile(), request.getAvatar());
         return CommonResponse.success();
     }
 

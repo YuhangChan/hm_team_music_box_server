@@ -5,6 +5,8 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+
+//TODO：这里的注解的检查在表单提交时起作用？按照以前的经验在前端输入时的检查是写在前端项目中的
 @Data
 @Schema(description = "注册请求")
 public class RegisterRequest {
@@ -24,21 +26,15 @@ public class RegisterRequest {
     })
     private String password;
 
-    @Schema(description = "姓名", required = true)
-    @NotNull
-    @Size(min = 2, max = 16, message = "姓名长度必须在 2-16 之间")
-    @Pattern.List({
-            @Pattern(regexp = "^[\\u4E00-\\u9FA5]{2,16}$", message = "姓名只能包含中文"),
-    })
-    private String name;
+//    @Schema(description = "姓名", required = true)
+//    @NotNull
+//    @Size(min = 2, max = 16, message = "姓名长度必须在 2-16 之间")
+//    @Pattern.List({
+//            @Pattern(regexp = "^[\\u4E00-\\u9FA5]{2,16}$", message = "姓名只能包含中文"),
+//    })
+//    private String name;
 
-    @Schema(description = "证件号", required = true)
-    @NotNull
-    @Size(min = 18, max = 18, message = "证件号长度必须为18")
-    @Pattern.List({
-            @Pattern(regexp = "^\\d{17}[0-9X]$", message = "证件号格式错误"),
-    })
-    private String idn;
+
 
     @Schema(description = "手机号", required = true)
     @NotNull
@@ -48,10 +44,12 @@ public class RegisterRequest {
     })
     private String phone;
 
-    @Schema(description = "证件类型", required = true)
-    @NotNull
-    @Pattern.List({
-            @Pattern(regexp = "^身份证|护照|其他$", message = "证件类型错误"),
-    })
-    private String type;
+
+
+//    @Schema(description = "个性签名", required = false)
+//    @Size(max = 20, message = "个性签名长度不能超过20")
+//    private String profile;
+
+    //TODO:还需要头像、喜欢流派，头像需要选择图片，喜欢流派需要选择标签，都需要和前端来一起实现
+
 }

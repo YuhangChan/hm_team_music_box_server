@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-//TODO: 两个request文件需要修改
 @Data
 @Schema(description = "登录请求")
 public class LoginRequest {

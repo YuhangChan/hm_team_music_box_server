@@ -66,11 +66,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void editInfo(String username, String name, String phoneNumber, String avatarURL) {
+    public void editInfo(String username, String name, String phoneNumber,String profile, String avatarURL) {
         UserEntity user = userDao.findByUsername(username);
         if(user == null){
             throw new BizException(CommonErrorType.ILLEGAL_ARGUMENTS, "用户不存在");
         }
-        userDao.save(user.setUsername(username).setName(name).setPhoneNumber(phoneNumber).setAvatarURL(avatarURL));
+        userDao.save(user.setUsername(username).setName(name).setPhoneNumber(phoneNumber).setProfile(profile).setAvatarURL(avatarURL));
     }
 }
