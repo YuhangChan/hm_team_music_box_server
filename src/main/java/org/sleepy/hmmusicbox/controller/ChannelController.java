@@ -20,4 +20,6 @@ public class ChannelController {
     public List<ChannelVO> searchChannel(@PathVariable("name") String name) {
         return channelService.searchChannel(name);
     }
+//    @GetMapping("test")
+
 }

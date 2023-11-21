@@ -27,6 +27,8 @@ public class ChannelEntity {
     @NotNull
     private String title;
 
-    @OneToMany
-    private List<PostEntity> posts;
+    private int subscriberCount;
+
+//    @OneToMany
+//    private List<PostEntity> posts;
 }

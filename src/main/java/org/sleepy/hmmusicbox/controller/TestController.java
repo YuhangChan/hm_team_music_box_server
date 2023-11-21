@@ -32,7 +32,7 @@ public class TestController {
 
     @GetMapping("/test/channel")
     public String testChannel() {
-        channelService.addTestChannel();
+        channelService.addChannel("aaa");
         return "Test Channel.";
     }
 

@@ -9,5 +9,6 @@ import java.util.List;
 public class ChannelVO {
     private Long id;
     private String title;
-    private List<PostEntity> postIDs;
+//    private List<PostEntity> postIDs;
+    private int subscriberCount;
 }

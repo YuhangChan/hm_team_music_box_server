@@ -22,9 +22,11 @@ public class ChannelServiceImpl implements ChannelService {
     }
 
     @Override
-    public void addChannel() {
-
+    public void addChannel(String title){
+        ChannelEntity channelEntity = ChannelEntity.builder().title(title).subscriberCount(0).build();
+        channelDao.save(channelEntity);
     }
+
 
     @Override
     public List<ChannelVO> searchChannel(String title) {

@@ -7,7 +7,7 @@ import java.util.List;
 public interface ChannelService {
     public void addTestChannel();
 
-    public void addChannel();
+    public void addChannel(String title);
 
     public List<ChannelVO> searchChannel(String title);
 
