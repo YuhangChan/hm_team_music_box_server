@@ -10,6 +10,8 @@ import lombok.experimental.Accessors;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.util.List;
+
 @Entity
 @Table
 @Data
@@ -24,4 +26,7 @@ public class ChannelEntity {
 
     @NotNull
     private String title;
+
+    @OneToMany
+    private List<PostEntity> posts;
 }
