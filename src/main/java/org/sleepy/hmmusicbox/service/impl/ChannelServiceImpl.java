@@ -38,4 +38,13 @@ public class ChannelServiceImpl implements ChannelService {
         }
         return list;
     }
+
+    @Override
+    public ChannelVO getChannelDetail(Long id) {
+        ChannelMapper mapper = ChannelMapper.INSTANCE;
+        ChannelEntity result = channelDao.findByIdIs(id);
+        return mapper.toChannelVO(result);
+    }
+
+
 }

@@ -10,4 +10,6 @@ import java.util.List;
 public interface ChannelDao extends JpaRepository<ChannelEntity, Long> {
     @Query
     List<ChannelEntity> findByTitleContaining(String title);
+    @Query
+    ChannelEntity findByIdIs(Long id);
 }

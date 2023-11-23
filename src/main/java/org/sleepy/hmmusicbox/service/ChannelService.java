@@ -11,4 +11,6 @@ public interface ChannelService {
 
     public List<ChannelVO> searchChannel(String title);
 
+    public ChannelVO getChannelDetail(Long id);
+
 }
