@@ -7,6 +7,7 @@ import org.sleepy.hmmusicbox.service.MusicService;
 import org.sleepy.hmmusicbox.service.PostService;
 import org.sleepy.hmmusicbox.service.ReplyService;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,6 +30,7 @@ public class TestController {
         musicService.addMusic(name, album, singer, detail, imageUrl);
         return musicService.getTestMusic();
     }
+
 
     @GetMapping("/test/channel")
     public String testChannel() {

@@ -14,5 +14,5 @@ public interface MusicService {
 
     public MusicVO getMusicDetail(Long id);
 
-
+    public void deleteAll();
 }

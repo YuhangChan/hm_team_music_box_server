@@ -52,4 +52,9 @@ public class MusicServiceImpl implements MusicService {
         return mapper.toMusicVO(musicDao.findByIdIs(id));
     }
 
+    @Override
+    public void deleteAll() {
+        musicDao.deleteAll();
+    }
+
 }
