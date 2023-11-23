@@ -10,6 +10,7 @@ import lombok.experimental.Accessors;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.net.URL;
 import java.util.List;
 
 @Entity
@@ -28,6 +29,9 @@ public class ChannelEntity {
     private String title;
 
     private int subscriberCount;
+
+    private URL img;
+
 
 //    @OneToMany
 //    private List<PostEntity> posts;

@@ -33,9 +33,9 @@ public class MusicController {
         musicService.addMusic(music.getName(), music.getAlbum(), music.getSinger(), music.getDetail(), music.getImageUrl());
     }
 
-    @DeleteMapping("/deleteAll")
-    public void deleteAll() {
-        musicService.deleteAll();
-    }
+//    @DeleteMapping("/deleteAll")
+//    public void deleteAll() {
+//        musicService.deleteAll();
+//    }
 
 }

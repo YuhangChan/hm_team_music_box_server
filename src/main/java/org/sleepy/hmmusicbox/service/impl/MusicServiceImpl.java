@@ -31,7 +31,7 @@ public class MusicServiceImpl implements MusicService {
     @Override
     public MusicVO getTestMusic() {
         List<MusicEntity> entity = musicDao.findAll();
-        return MusicMapper.INSTANCE.toMusicVO(entity.get(0));
+        return MusicMapper.INSTANCE.toMusicVO(entity.get(entity.size() - 1));
     }
 
     @Override
