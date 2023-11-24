@@ -20,45 +20,50 @@ stages:          # List of stages for jobs, and their order of execution
   - build
   - deploy
 
-build-job:
+test-job:
   stage: build
-  image: maven:3-openjdk-17
   script:
-    - touch ~/.m2/settings.xml
-    - |
-      cat <<'EOF' > ~/.m2/settings.xml
-      <settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
-          <pluginGroups>
-          </pluginGroups>
-          <proxies>
-          </proxies>
-          <servers>
-          </servers>
-          <mirrors>
-              <mirror>
-                  <id>nju_mirror</id>
-                  <mirrorOf>*</mirrorOf>
-                  <url>https://repo.nju.edu.cn/repository/maven-public/</url>
-              </mirror>
-          </mirrors>
-          <profiles>
-          </profiles>
-      </settings>
-      EOF
-    - |
-    - mvn install -DskipTests=true
-  artifacts:
-    paths:
-    - target/hmmusicbox-0.0.1-SNAPSHOT.jar
-    expire_in: 1 week
+    - ipconfig
 
-deploy-job:      # This job runs in the deploy stage.
-  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
-  image: ictu/sshpass
-  environment: production
-  script:
-    - sshpass -p "Aa123456" scp -o StrictHostKeyChecking=no target/hmmusicbox-0.0.1-SNAPSHOT.jar root@47.115.224.143:~/hm_team_music_box_server
-    - sshpass -p "Aa123456" ssh -o StrictHostKeyChecking=no root@47.115.224.143 "killall java;screen -d -m java -jar hm_team_music_box_server/hmmusicbox-0.0.1-SNAPSHOT.jar"
+#build-job:
+#  stage: build
+#  image: maven:3-openjdk-17
+#  script:
+#    - touch ~/.m2/settings.xml
+#    - |
+#      cat <<'EOF' > ~/.m2/settings.xml
+#      <settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+#                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+#                xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 https://maven.apache.org/xsd/settings-1.2.0.xsd">
+#          <pluginGroups>
+#          </pluginGroups>
+#          <proxies>
+#          </proxies>
+#          <servers>
+#          </servers>
+#          <mirrors>
+#              <mirror>
+#                  <id>nju_mirror</id>
+#                  <mirrorOf>*</mirrorOf>
+#                  <url>https://repo.nju.edu.cn/repository/maven-public/</url>
+#              </mirror>
+#          </mirrors>
+#          <profiles>
+#          </profiles>
+#      </settings>
+#      EOF
+#    - |
+#    - mvn install -DskipTests=true
+#  artifacts:
+#    paths:
+#    - target/hmmusicbox-0.0.1-SNAPSHOT.jar
+#    expire_in: 1 week
+#
+#deploy-job:      # This job runs in the deploy stage.
+#  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+#  image: ictu/sshpass
+#  environment: production
+#  script:
+#    - sshpass -p "MbVF8mG1MrY4" scp -o StrictHostKeyChecking=no target/hmmusicbox-0.0.1-SNAPSHOT.jar root@47.115.224.143:~/hm_team_music_box_server
+#    - sshpass -p "MbVF8mG1MrY4" ssh -o StrictHostKeyChecking=no root@47.115.224.143 "killall java;screen -d -m java -jar hm_team_music_box_server/hmmusicbox-0.0.1-SNAPSHOT.jar"
 
