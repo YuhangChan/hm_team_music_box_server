@@ -23,7 +23,7 @@ stages:          # List of stages for jobs, and their order of execution
 test-job:
   stage: build
   script:
-    - ipconfig
+    - cat /etc/hosts
 
 #build-job:
 #  stage: build
