@@ -11,10 +11,11 @@ public class ChannelEntityDTO {
     private Long id;
     private String title;
     private int subscriberCount;
-    private URL url;
-    private ChannelEntityDTO(String title, int subscriberCount, URL url) {
+    private URL img;
+    private ChannelEntityDTO(Long id, String title, int subscriberCount, URL img) {
+        this.id = id;
         this.title = title;
         this.subscriberCount = subscriberCount;
-        this.url = url;
+        this.img = img;
     }
 }

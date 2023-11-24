@@ -1,6 +1,7 @@
 package org.sleepy.hmmusicbox.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.sleepy.hmmusicbox.pojo.vo.channel.ChannelDTOVO;
 import org.sleepy.hmmusicbox.pojo.vo.channel.ChannelVO;
 import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
 import org.sleepy.hmmusicbox.service.ChannelService;
@@ -18,7 +19,7 @@ public class ChannelController {
 
     @GetMapping("/search/{name}")
     @ResponseStatus(HttpStatus.FOUND)
-    public List<ChannelVO> searchChannel(@PathVariable("name") String name) {
+    public List<ChannelDTOVO> searchChannel(@PathVariable("name") String name) {
         return channelService.searchChannel(name);
     }
     @GetMapping("/{id}")
