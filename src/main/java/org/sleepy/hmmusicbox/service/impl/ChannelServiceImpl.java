@@ -2,8 +2,11 @@ package org.sleepy.hmmusicbox.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.sleepy.hmmusicbox.dao.ChannelDao;
+import org.sleepy.hmmusicbox.mapper.ChannelDTOMapper;
 import org.sleepy.hmmusicbox.mapper.ChannelMapper;
 import org.sleepy.hmmusicbox.pojo.entity.ChannelEntity;
+import org.sleepy.hmmusicbox.pojo.entity.ChannelEntityDTO;
+import org.sleepy.hmmusicbox.pojo.vo.channel.ChannelDTOVO;
 import org.sleepy.hmmusicbox.pojo.vo.channel.ChannelVO;
 import org.sleepy.hmmusicbox.service.ChannelService;
 import org.springframework.stereotype.Service;
@@ -29,12 +32,12 @@ public class ChannelServiceImpl implements ChannelService {
 
 
     @Override
-    public List<ChannelVO> searchChannel(String title) {
-        ChannelMapper mapper = ChannelMapper.INSTANCE;
-        List<ChannelEntity> searchResult = channelDao.findByTitleContaining(title);
-        List<ChannelVO> list = new ArrayList<>();
-        for(ChannelEntity channelEntity : searchResult) {
-            list.add(mapper.toChannelVO(channelEntity));
+    public List<ChannelDTOVO> searchChannel(String title) {
+        ChannelDTOMapper mapper = ChannelDTOMapper.INSTANCE;
+        List<ChannelEntityDTO> searchResult = channelDao.findByTitleContaining(title);
+        List<ChannelDTOVO> list = new ArrayList<>();
+        for(ChannelEntityDTO channelEntityDTO : searchResult) {
+            list.add(mapper.toChannelDTOVO(channelEntityDTO));
         }
         return list;
     }

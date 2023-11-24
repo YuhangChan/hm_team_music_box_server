@@ -9,5 +9,5 @@ public class ChannelDTOVO {
     private Long id;
     private String title;
     private int subscriberCount;
-    private URL url;
+    private URL img;
 }
