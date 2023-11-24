@@ -32,8 +32,7 @@ public class UserController {
     @PostMapping("user")
     public CommonResponse<?> register(@Valid @RequestBody RegisterRequest request) {
         // Throws BizException if register failed.
-        userService.register(request.getUsername(), request.getPassword(), request.getPhone());
-
+        userService.register(request.getUsername(), request.getPhone(), request.getPassword());
         return CommonResponse.success();
     }
 

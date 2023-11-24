@@ -8,8 +8,6 @@ import org.sleepy.hmmusicbox.exception.CommonErrorType;
 import org.sleepy.hmmusicbox.pojo.entity.UserEntity;
 import org.sleepy.hmmusicbox.pojo.vo.user.UserVO;
 import org.sleepy.hmmusicbox.service.UserService;
-//import org.springframework.security.crypto.bcrypt.BCrypt;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import cn.dev33.satoken.secure.BCrypt;
@@ -17,8 +15,6 @@ import cn.dev33.satoken.secure.BCrypt;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
-
-
 
     @Override
     public void register(String username, String phoneNumber, String password) {
