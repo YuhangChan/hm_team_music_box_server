@@ -11,8 +11,7 @@ import lombok.experimental.Accessors;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @Entity
@@ -65,4 +64,12 @@ public class UserEntity {
     private List<String> fans;
 
     //偏好设置（日间/夜间模式、隐私设置）
+
+    //收藏的音乐的id
+    @ManyToMany
+    @JoinTable(
+            name = "music_like",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "music_id"))
+    private Set<MusicEntity> likes = new HashSet<>();
 }

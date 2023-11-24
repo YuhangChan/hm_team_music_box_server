@@ -4,6 +4,8 @@ package org.sleepy.hmmusicbox.controller;
 import cn.dev33.satoken.stp.StpUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.sleepy.hmmusicbox.exception.BizException;
+import org.sleepy.hmmusicbox.exception.CommonErrorType;
 import org.sleepy.hmmusicbox.exception.CommonResponse;
 import org.sleepy.hmmusicbox.pojo.vo.user.EditUserInfoRequest;
 import org.sleepy.hmmusicbox.pojo.vo.user.LoginRequest;
@@ -53,6 +55,24 @@ public class UserController {
         StpUtil.checkLogin();
         userService.editInfo(StpUtil.getLoginIdAsString(), request.getUsername(), request.getPhone(), request.getProfile(), request.getAvatar());
         return CommonResponse.success();
+    }
+
+    @PostMapping("/like/{id}")
+    public CommonResponse<?> likeMusic(@PathVariable("id") Long musicId) {
+        StpUtil.checkLogin();
+        if (userService.like(String.valueOf(StpUtil.getLoginId()), musicId))
+            return CommonResponse.success();
+        else
+            throw new BizException(CommonErrorType.NOT_FOUND, "Music not found.");
+    }
+
+    @PostMapping("/unlike/{id}")
+    public CommonResponse<?> unlikeMusic(@PathVariable("id") Long musicId) {
+        StpUtil.checkLogin();
+        if (userService.unlike(String.valueOf(StpUtil.getLoginId()), musicId))
+            return CommonResponse.success();
+        else
+            throw new BizException(CommonErrorType.NOT_FOUND, "Can't find music in likes.");
     }
 
 

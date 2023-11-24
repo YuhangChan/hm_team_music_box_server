@@ -14,5 +14,8 @@ public interface UserService {
 
     void editInfo(String username, String name, String phoneNumber, String profile,String avatarURL);
 
+    boolean like(String username, Long musicId);
+
+    boolean unlike(String username, Long musicId);
     //TODO:获取关注获取粉丝列表？
 }

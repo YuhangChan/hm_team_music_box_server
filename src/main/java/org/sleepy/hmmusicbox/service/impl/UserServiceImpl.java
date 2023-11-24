@@ -1,20 +1,29 @@
 package org.sleepy.hmmusicbox.service.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.sleepy.hmmusicbox.dao.MusicDao;
 import org.sleepy.hmmusicbox.dao.UserDao;
 import org.sleepy.hmmusicbox.exception.BizError;
 import org.sleepy.hmmusicbox.exception.BizException;
 import org.sleepy.hmmusicbox.exception.CommonErrorType;
+import org.sleepy.hmmusicbox.mapper.MusicMapper;
+import org.sleepy.hmmusicbox.pojo.entity.MusicEntity;
 import org.sleepy.hmmusicbox.pojo.entity.UserEntity;
+import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
 import org.sleepy.hmmusicbox.pojo.vo.user.UserVO;
 import org.sleepy.hmmusicbox.service.UserService;
 import org.springframework.stereotype.Service;
 
 import cn.dev33.satoken.secure.BCrypt;
+
+import java.util.Set;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     private final UserDao userDao;
+    private final MusicDao musicDao;
 
     @Override
     public void register(String username, String phoneNumber, String password) {
@@ -52,21 +61,51 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserVO findByUserName(String username) {
-        UserEntity user=userDao.findByUsername(username);
+        UserEntity user = userDao.findByUsername(username);
+        Set<MusicVO> likes = user.getLikes().stream().map(MusicMapper.INSTANCE::toMusicVO).collect(Collectors.toSet());
         return UserVO.builder()
                 .username(user.getUsername())
                 .phoneNumber(user.getPhoneNumber())
                 .avatarURL(user.getAvatarURL())
                 .profile(user.getProfile())
+                .likes(likes)
                 .build();
     }
 
     @Override
-    public void editInfo(String username, String name, String phoneNumber,String profile, String avatarURL) {
+    public void editInfo(String username, String name, String phoneNumber, String profile, String avatarURL) {
         UserEntity user = userDao.findByUsername(username);
-        if(user == null){
+        if (user == null) {
             throw new BizException(CommonErrorType.ILLEGAL_ARGUMENTS, "用户不存在");
         }
         userDao.save(user.setUsername(username).setName(name).setPhoneNumber(phoneNumber).setProfile(profile).setAvatarURL(avatarURL));
     }
+
+    @Override
+    public boolean like(String username, Long musicId) {
+        UserEntity user = userDao.findByUsername(username);
+        MusicEntity music = musicDao.findByIdIs(musicId);
+        if (music == null) return false;
+
+        Set<MusicEntity> likes = user.getLikes();
+        likes.add(music);
+        userDao.save(user);
+        return true;
+    }
+
+    @Override
+    public boolean unlike(String username, Long musicId) {
+        UserEntity user = userDao.findByUsername(username);
+        MusicEntity music = musicDao.findByIdIs(musicId);
+        if (music == null) return false;
+
+        Set<MusicEntity> likes = user.getLikes();
+        if (!likes.contains(music)) return false;
+
+        likes.remove(music);
+        userDao.save(user);
+        return true;
+    }
+
+
 }

@@ -2,14 +2,12 @@ package org.sleepy.hmmusicbox.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
-import org.sleepy.hmmusicbox.service.ChannelService;
-import org.sleepy.hmmusicbox.service.MusicService;
-import org.sleepy.hmmusicbox.service.PostService;
-import org.sleepy.hmmusicbox.service.ReplyService;
+import org.sleepy.hmmusicbox.service.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import cn.dev33.satoken.stp.StpUtil;
 
 @CrossOrigin(originPatterns = "*", allowCredentials = "true")
 @RestController
@@ -19,6 +17,7 @@ public class TestController {
     private final ChannelService channelService;
     private final PostService postService;
     private final ReplyService replyService;
+    private final UserService userService;
 
     @GetMapping("/test")
     public MusicVO test() {
@@ -54,5 +53,12 @@ public class TestController {
     public String testPostReply(){
         postService.addTestPostReply();
         return "Test Post Reply.";
+    }
+
+    @GetMapping("/test/music-like")
+    public String testMusicLike(){
+        StpUtil.checkLogin();
+        userService.like(String.valueOf(StpUtil.getLoginId()), 1l);
+        return "testMusicLike";
     }
 }
