@@ -49,5 +49,26 @@ public class ChannelServiceImpl implements ChannelService {
         return mapper.toChannelVO(result);
     }
 
+    @Override
+    public List<ChannelDTOVO> recommendChannel() {
+        ChannelDTOMapper mapper = ChannelDTOMapper.INSTANCE;
+        List<ChannelEntityDTO> searchResult = channelDao.findByTitleContaining("a");
+        List<ChannelDTOVO> list = new ArrayList<>();
+        for(int i = 0; i < 8; i++) {
+            list.add(mapper.toChannelDTOVO(searchResult.get(0)));
+        }
+        return list;
+    }
+
+    @Override
+    public List<ChannelDTOVO> showChannel() {
+        ChannelDTOMapper mapper = ChannelDTOMapper.INSTANCE;
+        List<ChannelEntityDTO> searchResult = channelDao.findByTitleContaining("a");
+        List<ChannelDTOVO> list = new ArrayList<>();
+        for(int i = 0; i < 15; i++) {
+            list.add(mapper.toChannelDTOVO(searchResult.get(0)));
+        }
+        return list;
+    }
 
 }

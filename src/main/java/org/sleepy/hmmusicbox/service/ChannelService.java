@@ -14,4 +14,8 @@ public interface ChannelService {
 
     public ChannelVO getChannelDetail(Long id);
 
+    public List<ChannelDTOVO> recommendChannel();
+
+    public List<ChannelDTOVO> showChannel();
+
 }

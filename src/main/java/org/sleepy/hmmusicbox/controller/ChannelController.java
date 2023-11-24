@@ -34,4 +34,15 @@ public class ChannelController {
         channelService.addChannel(channel.getTitle());
     }
 
+    @GetMapping("/recommend")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<ChannelDTOVO> recommendChannel() {
+        return channelService.recommendChannel();
+    }
+
+    @GetMapping("/show")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<ChannelDTOVO> showChannel() {
+        return channelService.showChannel();
+    }
 }
