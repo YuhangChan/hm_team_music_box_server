@@ -62,13 +62,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVO findByUserName(String username) {
         UserEntity user = userDao.findByUsername(username);
-        Set<MusicVO> likes = user.getLikes().stream().map(MusicMapper.INSTANCE::toMusicVO).collect(Collectors.toSet());
         return UserVO.builder()
                 .username(user.getUsername())
                 .phoneNumber(user.getPhoneNumber())
                 .avatarURL(user.getAvatarURL())
                 .profile(user.getProfile())
-                .likes(likes)
                 .build();
     }
 
@@ -105,6 +103,12 @@ public class UserServiceImpl implements UserService {
         likes.remove(music);
         userDao.save(user);
         return true;
+    }
+
+    @Override
+    public Set<MusicVO> getLikes(String username) {
+        UserEntity user = userDao.findByUsername(username);
+        return user.getLikes().stream().map(MusicMapper.INSTANCE::toMusicVO).collect(Collectors.toSet());
     }
 
 

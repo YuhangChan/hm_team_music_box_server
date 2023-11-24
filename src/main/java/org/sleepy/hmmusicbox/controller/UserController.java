@@ -7,12 +7,15 @@ import lombok.RequiredArgsConstructor;
 import org.sleepy.hmmusicbox.exception.BizException;
 import org.sleepy.hmmusicbox.exception.CommonErrorType;
 import org.sleepy.hmmusicbox.exception.CommonResponse;
+import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
 import org.sleepy.hmmusicbox.pojo.vo.user.EditUserInfoRequest;
 import org.sleepy.hmmusicbox.pojo.vo.user.LoginRequest;
 import org.sleepy.hmmusicbox.pojo.vo.user.RegisterRequest;
 import org.sleepy.hmmusicbox.pojo.vo.user.UserVO;
 import org.sleepy.hmmusicbox.service.UserService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @CrossOrigin(originPatterns = "*", allowCredentials = "true")
 @RestController
@@ -75,5 +78,10 @@ public class UserController {
             throw new BizException(CommonErrorType.NOT_FOUND, "Can't find music in likes.");
     }
 
+    @GetMapping("/likes")
+    public CommonResponse<Set<MusicVO>> getLikes() {
+        StpUtil.checkLogin();
+        return CommonResponse.success(userService.getLikes(String.valueOf(StpUtil.getLoginId())));
+    }
 
 }

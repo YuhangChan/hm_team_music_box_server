@@ -15,6 +15,5 @@ public class UserVO {
     private String phoneNumber;
     private String avatarURL;
     private String profile;
-    private Set<MusicVO> likes;
 
 }

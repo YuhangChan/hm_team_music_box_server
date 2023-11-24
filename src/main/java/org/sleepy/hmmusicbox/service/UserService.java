@@ -1,6 +1,9 @@
 package org.sleepy.hmmusicbox.service;
 
+import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
 import org.sleepy.hmmusicbox.pojo.vo.user.UserVO;
+
+import java.util.Set;
 
 public interface UserService {
 
@@ -17,5 +20,7 @@ public interface UserService {
     boolean like(String username, Long musicId);
 
     boolean unlike(String username, Long musicId);
+
+    Set<MusicVO> getLikes(String username);
     //TODO:获取关注获取粉丝列表？
 }
