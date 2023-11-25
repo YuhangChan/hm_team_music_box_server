@@ -13,8 +13,10 @@ import org.sleepy.hmmusicbox.pojo.vo.user.LoginRequest;
 import org.sleepy.hmmusicbox.pojo.vo.user.RegisterRequest;
 import org.sleepy.hmmusicbox.pojo.vo.user.UserVO;
 import org.sleepy.hmmusicbox.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Set;
 
 @CrossOrigin(originPatterns = "*", allowCredentials = "true")
@@ -82,6 +84,21 @@ public class UserController {
     public CommonResponse<Set<MusicVO>> getLikes() {
         StpUtil.checkLogin();
         return CommonResponse.success(userService.getLikes(String.valueOf(StpUtil.getLoginId())));
+    }
+
+    @DeleteMapping("/history/{id}")
+    public CommonResponse<?> deleteHistory(@PathVariable("id") Long musicId) {
+        StpUtil.checkLogin();
+        if (userService.removeFromHistory(String.valueOf(StpUtil.getLoginId()), musicId))
+            return CommonResponse.success();
+        else
+            throw new BizException(CommonErrorType.NOT_FOUND, "Can't find music in history.");
+    }
+
+    @GetMapping("/history")
+    public CommonResponse<List<MusicVO>> getHistory() {
+        StpUtil.checkLogin();
+        return CommonResponse.success(userService.getHistory(String.valueOf(StpUtil.getLoginId())));
     }
 
 }

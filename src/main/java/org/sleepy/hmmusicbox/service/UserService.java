@@ -3,9 +3,11 @@ package org.sleepy.hmmusicbox.service;
 import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
 import org.sleepy.hmmusicbox.pojo.vo.user.UserVO;
 
+import java.util.List;
 import java.util.Set;
 
 public interface UserService {
+    final int HISTORY_LENGTH = 1000;
 
     void loginByPhone(String phoneNumber, String password);
 
@@ -21,6 +23,13 @@ public interface UserService {
 
     boolean unlike(String username, Long musicId);
 
+    boolean addToHistory(String username, Long musicId);
+
+    boolean removeFromHistory(String username, Long musicId);
+
     Set<MusicVO> getLikes(String username);
+
+    List<MusicVO> getHistory(String username);
+
     //TODO:获取关注获取粉丝列表？
 }

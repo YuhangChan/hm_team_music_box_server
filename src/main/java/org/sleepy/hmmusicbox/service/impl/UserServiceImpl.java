@@ -16,6 +16,8 @@ import org.springframework.stereotype.Service;
 
 import cn.dev33.satoken.secure.BCrypt;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -106,9 +108,51 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean addToHistory(String username, Long musicId) {
+        UserEntity user = userDao.findByUsername(username);
+        MusicEntity music = musicDao.findByIdIs(musicId);
+        if (music == null) return false;
+
+        List<MusicEntity> history = user.getHistory();
+        if (history.contains(music)) {
+            history.remove(music);
+            history.add(music);
+            // 把这首歌放在历史记录的最前面
+        } else {
+            history.add(music);
+            history = history.stream().limit(HISTORY_LENGTH).collect(Collectors.toList());
+            //限制历史记录最大为HISTORY_LENGTH条
+        }
+        userDao.save(user);
+        return true;
+    }
+
+    @Override
+    public boolean removeFromHistory(String username, Long musicId) {
+        UserEntity user = userDao.findByUsername(username);
+        MusicEntity music = musicDao.findByIdIs(musicId);
+        if (music == null) return false;
+
+        List<MusicEntity> history = user.getHistory();
+        if (!history.contains(music)) return false;
+
+        history.remove(music);
+        userDao.save(user);
+        return true;
+    }
+
+    @Override
     public Set<MusicVO> getLikes(String username) {
         UserEntity user = userDao.findByUsername(username);
         return user.getLikes().stream().map(MusicMapper.INSTANCE::toMusicVO).collect(Collectors.toSet());
+    }
+
+    @Override
+    public List<MusicVO> getHistory(String username) {
+        UserEntity user = userDao.findByUsername(username);
+        List<MusicVO> history = new java.util.ArrayList<>(user.getHistory().stream().map(MusicMapper.INSTANCE::toMusicVO).toList());
+        Collections.reverse(history);
+        return history;
     }
 
 

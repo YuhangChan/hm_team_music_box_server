@@ -65,11 +65,18 @@ public class UserEntity {
 
     //偏好设置（日间/夜间模式、隐私设置）
 
-    //收藏的音乐的id
+    //收藏的音乐
     @ManyToMany
     @JoinTable(
             name = "music_like",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "music_id"))
     private Set<MusicEntity> likes = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(
+            name = "music_history",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "music_id"))
+    private List<MusicEntity> history = new ArrayList<>();
 }
