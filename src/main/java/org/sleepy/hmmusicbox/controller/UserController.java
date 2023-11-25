@@ -22,11 +22,11 @@ import java.util.Set;
 @CrossOrigin(originPatterns = "*", allowCredentials = "true")
 @RestController
 @RequiredArgsConstructor
-//@RequestMapping("/v1") //我也不是太清楚加这个有什么用
+@RequestMapping("/user")
 public class UserController {
     private final UserService userService;
 
-    @PostMapping("session")
+    @PostMapping("/login")
     public CommonResponse<?> login(@Valid @RequestBody LoginRequest request) {
         // Throws BizException if auth failed.
         userService.loginByUserName(request.getUsername(), request.getPassword());
@@ -36,26 +36,26 @@ public class UserController {
     }
 
 
-    @PostMapping("user")
+    @PostMapping("/regist")
     public CommonResponse<?> register(@Valid @RequestBody RegisterRequest request) {
         // Throws BizException if register failed.
         userService.register(request.getUsername(), request.getPhone(), request.getPassword());
         return CommonResponse.success();
     }
 
-    @DeleteMapping("session")
+    @DeleteMapping("/logout")
     public CommonResponse<?> logout() {
         StpUtil.checkLogin();
         return CommonResponse.success(200);
     }
 
-    @GetMapping("user")
+    @GetMapping("/info")
     public CommonResponse<UserVO> userInfo() {
         StpUtil.checkLogin();
         return CommonResponse.success(userService.findByUserName(String.valueOf(StpUtil.getLoginId())));
     }
 
-    @PutMapping("user")
+    @PutMapping("/updateinfo")
     public CommonResponse<?> editInfo(@Valid @RequestBody EditUserInfoRequest request) {
         StpUtil.checkLogin();
         userService.editInfo(StpUtil.getLoginIdAsString(), request.getUsername(), request.getPhone(), request.getProfile(), request.getAvatar());
