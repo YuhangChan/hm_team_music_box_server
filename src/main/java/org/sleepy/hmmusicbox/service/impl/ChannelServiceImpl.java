@@ -4,11 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.sleepy.hmmusicbox.dao.ChannelDao;
 import org.sleepy.hmmusicbox.mapper.ChannelDTOMapper;
 import org.sleepy.hmmusicbox.mapper.ChannelMapper;
+import org.sleepy.hmmusicbox.mapper.PostMapper;
 import org.sleepy.hmmusicbox.pojo.entity.ChannelEntity;
 import org.sleepy.hmmusicbox.pojo.entity.ChannelEntityDTO;
 import org.sleepy.hmmusicbox.pojo.entity.PostEntity;
 import org.sleepy.hmmusicbox.pojo.vo.channel.ChannelDTOVO;
 import org.sleepy.hmmusicbox.pojo.vo.channel.ChannelVO;
+import org.sleepy.hmmusicbox.pojo.vo.post.PostVO;
 import org.sleepy.hmmusicbox.service.ChannelService;
 import org.springframework.stereotype.Service;
 
@@ -78,5 +80,17 @@ public class ChannelServiceImpl implements ChannelService {
         channel.getPosts().add(post);
         post.setChannel(channel);
         channelDao.save(channel);
+    }
+
+    @Override
+    public List<PostVO> getPosts(Long id) {
+        ChannelEntity channel = channelDao.findByIdIs(id);
+        PostMapper postMapper = PostMapper.INSTANCE;
+        List<PostEntity> posts = channel.getPosts();
+        List<PostVO> postVOS = new ArrayList<>();
+        for (PostEntity post: posts) {
+            postVOS.add(postMapper.toPostVO(post));
+        }
+        return postVOS;
     }
 }

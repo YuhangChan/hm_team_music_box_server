@@ -2,6 +2,7 @@ package org.sleepy.hmmusicbox.service;
 
 import org.sleepy.hmmusicbox.pojo.vo.channel.ChannelDTOVO;
 import org.sleepy.hmmusicbox.pojo.vo.channel.ChannelVO;
+import org.sleepy.hmmusicbox.pojo.vo.post.PostVO;
 
 import java.util.List;
 
@@ -19,5 +20,7 @@ public interface ChannelService {
     public List<ChannelDTOVO> showChannel();
 
     public void addPost(Long id, String title, String content, Long userId);
+
+    public List<PostVO> getPosts(Long id);
 
 }
