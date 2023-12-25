@@ -39,6 +39,7 @@ public class ChannelEntity {
 
 //    @JsonIgnore
     @OneToMany(mappedBy = "channel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<PostEntity> posts = new ArrayList<>();
 
 
