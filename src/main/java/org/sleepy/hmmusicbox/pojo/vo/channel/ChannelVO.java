@@ -13,5 +13,5 @@ public class ChannelVO {
     private String title;
     private int subscriberCount;
     private URL img;
-    private List<PostEntity> posts;
+    private List<PostVO> posts;
 }

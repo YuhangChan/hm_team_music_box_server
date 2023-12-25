@@ -52,4 +52,10 @@ public class ChannelController {
     public void addPost(@RequestBody PostVO post, @PathVariable("id") Long id) {
         channelService.addPost(id, post.getTitle(), post.getContent(), post.getPosterID());
     }
+
+    @GetMapping("/posts/{id}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public List<PostVO> showPosts(@PathVariable("id") Long id) {
+        return channelService.getPosts(id);
+    }
 }

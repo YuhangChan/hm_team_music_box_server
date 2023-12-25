@@ -1,5 +1,7 @@
 package org.sleepy.hmmusicbox.pojo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -21,6 +23,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "posts"})
+
 public class ChannelEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,8 +37,9 @@ public class ChannelEntity {
 
     private URL img;
 
-
+//    @JsonIgnore
     @OneToMany(mappedBy = "channel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<PostEntity> posts = new ArrayList<>();
 
 
