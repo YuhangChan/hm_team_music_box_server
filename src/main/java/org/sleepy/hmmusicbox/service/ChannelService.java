@@ -18,4 +18,6 @@ public interface ChannelService {
 
     public List<ChannelDTOVO> showChannel();
 
+    public void addPost(Long id, String title, String content, Long userId);
+
 }

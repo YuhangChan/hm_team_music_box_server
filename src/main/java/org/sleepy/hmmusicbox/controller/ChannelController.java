@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.sleepy.hmmusicbox.pojo.vo.channel.ChannelDTOVO;
 import org.sleepy.hmmusicbox.pojo.vo.channel.ChannelVO;
 import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
+import org.sleepy.hmmusicbox.pojo.vo.post.PostVO;
 import org.sleepy.hmmusicbox.service.ChannelService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -44,5 +45,11 @@ public class ChannelController {
     @ResponseStatus(HttpStatus.FOUND)
     public List<ChannelDTOVO> showChannel() {
         return channelService.showChannel();
+    }
+
+    @PostMapping("/post/{id}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addPost(@RequestBody PostVO post, @PathVariable("id") Long id) {
+        channelService.addPost(id, post.getTitle(), post.getContent(), post.getPosterID());
     }
 }

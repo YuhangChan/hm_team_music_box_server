@@ -6,6 +6,7 @@ import org.sleepy.hmmusicbox.mapper.ChannelDTOMapper;
 import org.sleepy.hmmusicbox.mapper.ChannelMapper;
 import org.sleepy.hmmusicbox.pojo.entity.ChannelEntity;
 import org.sleepy.hmmusicbox.pojo.entity.ChannelEntityDTO;
+import org.sleepy.hmmusicbox.pojo.entity.PostEntity;
 import org.sleepy.hmmusicbox.pojo.vo.channel.ChannelDTOVO;
 import org.sleepy.hmmusicbox.pojo.vo.channel.ChannelVO;
 import org.sleepy.hmmusicbox.service.ChannelService;
@@ -70,5 +71,12 @@ public class ChannelServiceImpl implements ChannelService {
         }
         return list;
     }
-
+    @Override
+    public void addPost(Long id, String title, String content, Long userId) {
+        ChannelEntity channel = channelDao.findByIdIs(id);
+        PostEntity post = PostEntity.builder().posterID(userId).content(content).title(title).replies(new ArrayList<>()).build();
+        channel.getPosts().add(post);
+        post.setChannel(channel);
+        channelDao.save(channel);
+    }
 }

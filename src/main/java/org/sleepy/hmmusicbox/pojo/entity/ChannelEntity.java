@@ -11,6 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,6 +34,8 @@ public class ChannelEntity {
     private URL img;
 
 
-//    @OneToMany
-//    private List<PostEntity> posts;
+    @OneToMany(mappedBy = "channel", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<PostEntity> posts = new ArrayList<>();
+
+
 }

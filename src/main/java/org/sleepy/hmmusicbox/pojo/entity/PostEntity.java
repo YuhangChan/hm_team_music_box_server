@@ -40,6 +40,10 @@ public class PostEntity {
     @JoinColumn(name = "post_id")
     private List<ReplyEntity> replies = new ArrayList<>();
 
+    @ManyToOne
+    @JoinColumn(name = "channel_id")
+    private ChannelEntity channel;
+
     @CreationTimestamp
     private Date createdAt;
 
