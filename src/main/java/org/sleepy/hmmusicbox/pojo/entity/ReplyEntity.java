@@ -28,15 +28,19 @@ public class ReplyEntity {
     private Long replierID;
 
     @NotNull
-    @Lob
+//    @Lob
     private String content;
 
-    @NotNull
-    private int floor;
+//    @NotNull
+//    private int floor;
 
     @CreationTimestamp
     private Date createdAt;
 
     @UpdateTimestamp
     private Date updatedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    private PostEntity post;
 }

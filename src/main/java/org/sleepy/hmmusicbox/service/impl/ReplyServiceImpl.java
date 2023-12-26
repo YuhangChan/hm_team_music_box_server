@@ -12,7 +12,12 @@ public class ReplyServiceImpl implements ReplyService {
     private final ReplyDao replyDao;
     @Override
     public void addTestReply() {
-        ReplyEntity replyEntity = ReplyEntity.builder().content("Test Content.").replierID(1L).floor(0).build();
+        ReplyEntity replyEntity = ReplyEntity.builder().content("Test Content.").replierID(1L).build();
         replyDao.save(replyEntity);
+    }
+
+    @Override
+    public void deleteReply(Long id) {
+        replyDao.deleteById(id);
     }
 }

@@ -40,8 +40,8 @@ public class PostEntity {
     @NotNull
     private Long posterID;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "post_id")
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<ReplyEntity> replies = new ArrayList<>();
 
     @ManyToOne
