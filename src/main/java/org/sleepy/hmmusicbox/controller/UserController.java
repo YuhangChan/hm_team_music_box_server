@@ -61,7 +61,7 @@ public class UserController {
         if (userVO != null) {
             return CommonResponse.success(userVO);
         } else {
-            return CommonResponse.failed("用户信息不存在");
+            throw new BizException(CommonErrorType.NOT_FOUND, "Can't find user in database(just a tip,maybe other bug).");
         }
     }
 
