@@ -6,6 +6,7 @@ import org.sleepy.hmmusicbox.pojo.vo.channel.ChannelVO;
 import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
 import org.sleepy.hmmusicbox.pojo.vo.post.PostVO;
 import org.sleepy.hmmusicbox.service.ChannelService;
+import org.sleepy.hmmusicbox.service.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import java.util.List;
 @RequestMapping("/channel")
 public class ChannelController {
     private final ChannelService channelService;
+    private final PostService postService;
 
     @GetMapping("/search/{name}")
     @ResponseStatus(HttpStatus.FOUND)
@@ -57,5 +59,10 @@ public class ChannelController {
     @ResponseStatus(HttpStatus.FOUND)
     public List<PostVO> showPosts(@PathVariable("id") Long id) {
         return channelService.getPosts(id);
+    }
+    @DeleteMapping("/deletePost/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void deletePost(@PathVariable("id") Long id) {
+        postService.deletePost(id);
     }
 }

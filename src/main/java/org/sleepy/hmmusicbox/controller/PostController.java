@@ -27,11 +27,7 @@ public class PostController {
     public void addReply(@PathVariable("id") Long id, @RequestBody ReplyVO reply) {
         postService.addReply(id, reply.getReplierID(), reply.getContent());
     }
-    @DeleteMapping("/delete/{id}")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public void deletePost(@PathVariable("id") Long id) {
-        postService.deletePost(id);
-    }
+
 
     @DeleteMapping("/deleteReply/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)

@@ -2,7 +2,6 @@ package org.sleepy.hmmusicbox.dao;
 
 import org.sleepy.hmmusicbox.pojo.entity.ChannelEntity;
 import org.sleepy.hmmusicbox.pojo.entity.ChannelEntityDTO;
-import org.sleepy.hmmusicbox.pojo.vo.channel.ChannelVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -14,4 +13,6 @@ public interface ChannelDao extends JpaRepository<ChannelEntity, Long> {
     List<ChannelEntityDTO> findByTitleContaining(@Param("title") String title);
     @Query
     ChannelEntity findByIdIs(Long id);
+    @Query("SELECT new org.sleepy.hmmusicbox.pojo.entity.ChannelEntityDTO(e.id, e.title, e.subscriberCount, e.img) from ChannelEntity e")
+    List<ChannelEntityDTO> findAllDetails();
 }
