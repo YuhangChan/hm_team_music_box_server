@@ -18,6 +18,7 @@ import cn.dev33.satoken.secure.BCrypt;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -64,6 +65,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserVO findByUserName(String username) {
         UserEntity user = userDao.findByUsername(username);
+        return UserVO.builder()
+                .username(user.getUsername())
+                .phoneNumber(user.getPhoneNumber())
+                .avatarURL(user.getAvatarURL())
+                .profile(user.getProfile())
+                .build();
+    }
+
+    @Override
+    public UserVO findByUserId(Long id) {
+        Optional<UserEntity> optionalUser = userDao.findById(id);
+        // 使用orElse获取UserEntity，如果不存在则返回null
+        UserEntity user = optionalUser.orElse(null);
         return UserVO.builder()
                 .username(user.getUsername())
                 .phoneNumber(user.getPhoneNumber())

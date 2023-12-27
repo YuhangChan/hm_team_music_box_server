@@ -55,6 +55,16 @@ public class UserController {
         return CommonResponse.success(userService.findByUserName(String.valueOf(StpUtil.getLoginId())));
     }
 
+    @GetMapping("/userInfo/{userId}")
+    public CommonResponse<UserVO> getUserInfo(@PathVariable("userId") Long userId) {
+        UserVO userVO = userService.findByUserId(userId);
+        if (userVO != null) {
+            return CommonResponse.success(userVO);
+        } else {
+            return CommonResponse.failed("用户信息不存在");
+        }
+    }
+
     @PutMapping("/updateinfo")
     public CommonResponse<?> editInfo(@Valid @RequestBody EditUserInfoRequest request) {
         StpUtil.checkLogin();
