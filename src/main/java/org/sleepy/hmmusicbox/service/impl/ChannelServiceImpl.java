@@ -14,6 +14,7 @@ import org.sleepy.hmmusicbox.pojo.vo.post.PostVO;
 import org.sleepy.hmmusicbox.service.ChannelService;
 import org.springframework.stereotype.Service;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,8 +29,8 @@ public class ChannelServiceImpl implements ChannelService {
     }
 
     @Override
-    public void addChannel(String title){
-        ChannelEntity channelEntity = ChannelEntity.builder().title(title).subscriberCount(0).build();
+    public void addChannel(String title, URL img){
+        ChannelEntity channelEntity = ChannelEntity.builder().title(title).img(img).subscriberCount(0).build();
         channelDao.save(channelEntity);
     }
 
@@ -66,10 +67,10 @@ public class ChannelServiceImpl implements ChannelService {
     @Override
     public List<ChannelDTOVO> showChannel() {
         ChannelDTOMapper mapper = ChannelDTOMapper.INSTANCE;
-        List<ChannelEntityDTO> searchResult = channelDao.findByTitleContaining("");
+        List<ChannelEntityDTO> searchResult = channelDao.findAllDetails();
         List<ChannelDTOVO> list = new ArrayList<>();
-        for(int i = 0; i < 15; i++) {
-            list.add(mapper.toChannelDTOVO(searchResult.get(0)));
+        for (ChannelEntityDTO channelEntityDTO : searchResult) {
+            list.add(mapper.toChannelDTOVO(channelEntityDTO));
         }
         return list;
     }

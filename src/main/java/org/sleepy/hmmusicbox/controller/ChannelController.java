@@ -33,8 +33,8 @@ public class ChannelController {
 
     @PostMapping(value = "/add", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public void createMusic(@RequestBody ChannelVO channel) {
-        channelService.addChannel(channel.getTitle());
+    public void createChannel(@RequestBody ChannelVO channel) {
+        channelService.addChannel(channel.getTitle(), channel.getImg());
     }
 
     @GetMapping("/recommend")

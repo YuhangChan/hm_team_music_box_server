@@ -4,12 +4,13 @@ import org.sleepy.hmmusicbox.pojo.vo.channel.ChannelDTOVO;
 import org.sleepy.hmmusicbox.pojo.vo.channel.ChannelVO;
 import org.sleepy.hmmusicbox.pojo.vo.post.PostVO;
 
+import java.net.URL;
 import java.util.List;
 
 public interface ChannelService {
     public void addTestChannel();
 
-    public void addChannel(String title);
+    public void addChannel(String title, URL img);
 
     public List<ChannelDTOVO> searchChannel(String title);
 
