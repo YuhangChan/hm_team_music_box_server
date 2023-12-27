@@ -1,6 +1,7 @@
 package org.sleepy.hmmusicbox.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.sleepy.hmmusicbox.pojo.vo.post.PostVO;
 import org.sleepy.hmmusicbox.pojo.vo.reply.ReplyVO;
 import org.sleepy.hmmusicbox.service.PostService;
 import org.sleepy.hmmusicbox.service.ReplyService;
@@ -28,7 +29,11 @@ public class PostController {
         postService.addReply(id, reply.getReplierID(), reply.getContent());
     }
 
-
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.FOUND)
+    public PostVO getPost(@PathVariable("id") Long id) {
+        return postService.getPost(id);
+    }
     @DeleteMapping("/deleteReply/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void deleteReply(@PathVariable("id") Long id) {

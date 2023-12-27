@@ -24,4 +24,6 @@ public interface ChannelService {
 
     public List<PostVO> getPosts(Long id);
 
+
+
 }

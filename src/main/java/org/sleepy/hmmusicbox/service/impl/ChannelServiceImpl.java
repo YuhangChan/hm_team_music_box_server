@@ -2,6 +2,7 @@ package org.sleepy.hmmusicbox.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.sleepy.hmmusicbox.dao.ChannelDao;
+import org.sleepy.hmmusicbox.dao.PostDao;
 import org.sleepy.hmmusicbox.mapper.ChannelDTOMapper;
 import org.sleepy.hmmusicbox.mapper.ChannelMapper;
 import org.sleepy.hmmusicbox.mapper.PostMapper;
@@ -22,6 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ChannelServiceImpl implements ChannelService {
     private final ChannelDao channelDao;
+    private final PostDao postDao;
     @Override
     public void addTestChannel() {
         ChannelEntity channelEntity = ChannelEntity.builder().title("Test").build();
@@ -94,4 +96,5 @@ public class ChannelServiceImpl implements ChannelService {
         }
         return postVOS;
     }
+
 }

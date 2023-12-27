@@ -3,9 +3,11 @@ package org.sleepy.hmmusicbox.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.sleepy.hmmusicbox.dao.PostDao;
 import org.sleepy.hmmusicbox.dao.ReplyDao;
+import org.sleepy.hmmusicbox.mapper.PostMapper;
 import org.sleepy.hmmusicbox.mapper.ReplyMapper;
 import org.sleepy.hmmusicbox.pojo.entity.PostEntity;
 import org.sleepy.hmmusicbox.pojo.entity.ReplyEntity;
+import org.sleepy.hmmusicbox.pojo.vo.post.PostVO;
 import org.sleepy.hmmusicbox.pojo.vo.reply.ReplyVO;
 import org.sleepy.hmmusicbox.service.PostService;
 import org.springframework.stereotype.Service;
@@ -57,5 +59,11 @@ public class PostServiceImpl implements PostService {
     @Override
     public void deletePost(Long id) {
         postDao.deleteById(id);
+    }
+
+    @Override
+    public PostVO getPost(Long id) {
+        PostMapper postMapper = PostMapper.INSTANCE;
+        return postMapper.toPostVO(postDao.findByIdIs(id));
     }
 }
