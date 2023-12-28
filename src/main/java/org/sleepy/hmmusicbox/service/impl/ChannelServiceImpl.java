@@ -77,9 +77,9 @@ public class ChannelServiceImpl implements ChannelService {
         return list;
     }
     @Override
-    public Long addPost(Long id, String title, String content, Long userId) {
+    public Long addPost(Long id, String title, String content, String username) {
         ChannelEntity channel = channelDao.findByIdIs(id);
-        PostEntity post = PostEntity.builder().posterID(userId).content(content).title(title).replies(new ArrayList<>()).build();
+        PostEntity post = PostEntity.builder().content(content).title(title).replies(new ArrayList<>()).username(username).build();
         channel.getPosts().add(post);
         post.setChannel(channel);
         channelDao.save(channel);

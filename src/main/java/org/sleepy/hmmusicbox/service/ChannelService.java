@@ -20,7 +20,7 @@ public interface ChannelService {
 
     public List<ChannelDTOVO> showChannel();
 
-    public Long addPost(Long id, String title, String content, Long userId);
+    public Long addPost(Long id, String title, String content, String username);
 
     public List<PostVO> getPosts(Long id);
 

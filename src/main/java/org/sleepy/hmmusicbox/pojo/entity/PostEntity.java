@@ -37,8 +37,7 @@ public class PostEntity {
     @NotNull
     private String content;
 
-    @NotNull
-    private Long posterID;
+    private String username;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
@@ -53,4 +52,6 @@ public class PostEntity {
 
     @UpdateTimestamp
     private Date updatedAt;
+
+
 }

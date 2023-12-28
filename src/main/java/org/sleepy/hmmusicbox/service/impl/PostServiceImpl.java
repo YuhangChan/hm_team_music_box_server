@@ -23,7 +23,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void addTestPost() {
-        PostEntity postEntity = PostEntity.builder().title("Test").content("Test Content.").posterID(1L).build();
+        PostEntity postEntity = PostEntity.builder().title("Test").content("Test Content.").build();
         postDao.save(postEntity);
     }
 

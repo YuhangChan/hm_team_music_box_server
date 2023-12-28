@@ -1,12 +1,16 @@
 package org.sleepy.hmmusicbox.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
 import lombok.RequiredArgsConstructor;
+import org.sleepy.hmmusicbox.exception.BizException;
+import org.sleepy.hmmusicbox.exception.CommonErrorType;
 import org.sleepy.hmmusicbox.pojo.vo.channel.ChannelDTOVO;
 import org.sleepy.hmmusicbox.pojo.vo.channel.ChannelVO;
 import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
 import org.sleepy.hmmusicbox.pojo.vo.post.PostVO;
 import org.sleepy.hmmusicbox.service.ChannelService;
 import org.sleepy.hmmusicbox.service.PostService;
+import org.sleepy.hmmusicbox.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +23,8 @@ import java.util.List;
 public class ChannelController {
     private final ChannelService channelService;
     private final PostService postService;
+    private final UserService userService;
+
 
     @GetMapping("/search/{name}")
     @ResponseStatus(HttpStatus.FOUND)
@@ -52,7 +58,12 @@ public class ChannelController {
     @PostMapping("/post/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public Long addPost(@RequestBody PostVO post, @PathVariable("id") Long id) {
-        return channelService.addPost(id, post.getTitle(), post.getContent(), post.getPosterID());
+        if(StpUtil.isLogin()) {
+            return channelService.addPost(id, post.getTitle(), post.getContent(), StpUtil.getLoginId().toString());
+        } else {
+            throw new BizException(CommonErrorType.UNAUTHORIZED, "Can't post while not logged in.");
+        }
+
     }
 
     @GetMapping("/posts/{id}")

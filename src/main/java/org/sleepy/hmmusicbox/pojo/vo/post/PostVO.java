@@ -11,7 +11,7 @@ public class PostVO {
     private Long id;
     private String title;
     private String content;
-    private Long posterID;
+    private String username;
     private List<ReplyEntity> replies;
     private ChannelEntity channel;
 

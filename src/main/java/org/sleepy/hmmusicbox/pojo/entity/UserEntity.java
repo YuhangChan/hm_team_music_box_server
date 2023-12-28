@@ -79,4 +79,6 @@ public class UserEntity {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "music_id"))
     private List<MusicEntity> history = new ArrayList<>();
+
+
 }
