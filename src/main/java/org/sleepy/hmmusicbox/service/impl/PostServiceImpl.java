@@ -30,15 +30,15 @@ public class PostServiceImpl implements PostService {
     @Override
     public void addTestPostReply() {
         PostEntity postEntity = postDao.findById(1L).get();
-        ReplyEntity replyEntity = ReplyEntity.builder().content("Test Content.").replierID(1L).build();
+        ReplyEntity replyEntity = ReplyEntity.builder().content("Test Content.").build();
 
         postEntity.getReplies().add(replyEntity);
         postDao.save(postEntity);
     }
     @Override
-    public void addReply(Long postID, Long replierID, String content) {
+    public void addReply(Long postID, String username, String content) {
         PostEntity post = postDao.findByIdIs(postID);
-        ReplyEntity replyEntity = ReplyEntity.builder().replierID(replierID).content(content).build();
+        ReplyEntity replyEntity = ReplyEntity.builder().username(username).content(content).build();
         post.getReplies().add(replyEntity);
         replyEntity.setPost(post);
         postDao.save(post);

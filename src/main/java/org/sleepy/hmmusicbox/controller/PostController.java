@@ -1,6 +1,9 @@
 package org.sleepy.hmmusicbox.controller;
 
+import cn.dev33.satoken.stp.StpUtil;
 import lombok.RequiredArgsConstructor;
+import org.sleepy.hmmusicbox.exception.BizException;
+import org.sleepy.hmmusicbox.exception.CommonErrorType;
 import org.sleepy.hmmusicbox.pojo.vo.post.PostVO;
 import org.sleepy.hmmusicbox.pojo.vo.reply.ReplyVO;
 import org.sleepy.hmmusicbox.service.PostService;
@@ -26,7 +29,11 @@ public class PostController {
     @PostMapping (value = "/reply/{id}", consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public void addReply(@PathVariable("id") Long id, @RequestBody ReplyVO reply) {
-        postService.addReply(id, reply.getReplierID(), reply.getContent());
+        if(StpUtil.isLogin()) {
+            postService.addReply(id, StpUtil.getLoginId().toString(), reply.getContent());
+        } else {
+            throw new BizException(CommonErrorType.UNAUTHORIZED, "Can't reply while not logged in.");
+        }
     }
 
     @GetMapping("/{id}")

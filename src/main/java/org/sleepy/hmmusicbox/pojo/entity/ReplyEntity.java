@@ -25,7 +25,7 @@ public class ReplyEntity {
     private Long id;
 
     @NotNull
-    private Long replierID;
+    private String username;
 
     @NotNull
 //    @Lob

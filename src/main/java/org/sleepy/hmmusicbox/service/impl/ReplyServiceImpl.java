@@ -12,7 +12,7 @@ public class ReplyServiceImpl implements ReplyService {
     private final ReplyDao replyDao;
     @Override
     public void addTestReply() {
-        ReplyEntity replyEntity = ReplyEntity.builder().content("Test Content.").replierID(1L).build();
+        ReplyEntity replyEntity = ReplyEntity.builder().content("Test Content.").build();
         replyDao.save(replyEntity);
     }
 

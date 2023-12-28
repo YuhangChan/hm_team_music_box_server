@@ -8,7 +8,7 @@ import java.util.List;
 public interface PostService {
     public void addTestPost();
     public void addTestPostReply();
-    public void addReply(Long postID, Long replierID, String content);
+    public void addReply(Long postID, String username, String content);
     public List<ReplyVO> showReply(Long id);
     public PostVO getPost(Long id);
 
