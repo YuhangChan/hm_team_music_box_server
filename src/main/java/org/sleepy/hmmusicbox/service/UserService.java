@@ -16,6 +16,7 @@ public interface UserService {
     void register(String username, String phoneNumber,String password);
 
     UserVO findByUserName(String username);
+    UserVO findByUserId(Long id);
 
     void editInfo(String username, String name, String phoneNumber, String profile,String avatarURL);
 
