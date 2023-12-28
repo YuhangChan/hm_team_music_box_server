@@ -51,8 +51,8 @@ public class ChannelController {
 
     @PostMapping("/post/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addPost(@RequestBody PostVO post, @PathVariable("id") Long id) {
-        channelService.addPost(id, post.getTitle(), post.getContent(), post.getPosterID());
+    public Long addPost(@RequestBody PostVO post, @PathVariable("id") Long id) {
+        return channelService.addPost(id, post.getTitle(), post.getContent(), post.getPosterID());
     }
 
     @GetMapping("/posts/{id}")
