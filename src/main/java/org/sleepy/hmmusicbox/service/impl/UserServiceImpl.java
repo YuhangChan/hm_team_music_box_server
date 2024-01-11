@@ -7,7 +7,6 @@ import org.sleepy.hmmusicbox.exception.BizError;
 import org.sleepy.hmmusicbox.exception.BizException;
 import org.sleepy.hmmusicbox.exception.CommonErrorType;
 import org.sleepy.hmmusicbox.mapper.MusicMapper;
-import org.sleepy.hmmusicbox.mapper.TalkMapper;
 import org.sleepy.hmmusicbox.pojo.entity.MusicEntity;
 import org.sleepy.hmmusicbox.pojo.entity.UserEntity;
 import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
@@ -170,20 +169,6 @@ public class UserServiceImpl implements UserService {
         Collections.reverse(history);
         return history;
     }
-    @Override
-    public List<TalkVO> getTalkHistory(String username) {
-        UserEntity user = userDao.findByUsername(username);
-        List<TalkVO> history = new java.util.ArrayList<>(user.getTalkHistory().stream().map(TalkMapper.INSTANCE::toTalkVO).toList());
-        Collections.reverse(history);
-        return history;
-    }
-    @Override
-    public void addTalkHistory(String username, String content) {
-        TalkMapper mapper = TalkMapper.INSTANCE;
-        UserEntity user = userDao.findByUsername(username);
-        List<TalkEntity> history = user.getTalkHistory();
-        TalkEntity talkEntity = TalkEntity.builder().content(content).sender(username).build();
-        history.add(talkEntity);
-        userDao.save(user);
-    }
+
+
 }
