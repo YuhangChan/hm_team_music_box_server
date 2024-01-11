@@ -4,7 +4,5 @@ import lombok.Data;
 
 @Data
 public class TalkVO {
-    private Long id;
-    private String sender;
-    private String content;
+    private String text;
 }

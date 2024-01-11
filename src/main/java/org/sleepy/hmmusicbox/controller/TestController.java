@@ -3,11 +3,10 @@ package org.sleepy.hmmusicbox.controller;
 import lombok.RequiredArgsConstructor;
 import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
 import org.sleepy.hmmusicbox.service.*;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import cn.dev33.satoken.stp.StpUtil;
+
+import java.io.IOException;
 
 @CrossOrigin(originPatterns = "*", allowCredentials = "true")
 @RestController
@@ -18,6 +17,7 @@ public class TestController {
     private final PostService postService;
     private final ReplyService replyService;
     private final UserService userService;
+    private final TalkService talkService;
 
     @GetMapping("/test")
     public MusicVO test() {
@@ -38,27 +38,33 @@ public class TestController {
     }
 
     @GetMapping("/test/post")
-    public String testPost(){
+    public String testPost() {
         postService.addTestPost();
         return "Test Post.";
     }
 
     @GetMapping("/test/reply")
-    public String testReply(){
+    public String testReply() {
         replyService.addTestReply();
         return "Test Reply.";
     }
 
     @GetMapping("/test/post-reply")
-    public String testPostReply(){
+    public String testPostReply() {
         postService.addTestPostReply();
         return "Test Post Reply.";
     }
 
     @GetMapping("/test/music-like")
-    public String testMusicLike(){
+    public String testMusicLike() {
         StpUtil.checkLogin();
         userService.like(String.valueOf(StpUtil.getLoginId()), 1l);
         return "testMusicLike";
     }
+
+    @GetMapping("/test/talk")
+    public String talk() throws IOException {
+        return talkService.talk("一闪一闪亮晶晶");
+    }
+
 }

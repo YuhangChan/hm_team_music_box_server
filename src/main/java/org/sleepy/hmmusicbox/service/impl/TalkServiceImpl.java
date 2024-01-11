@@ -1,6 +1,14 @@
 package org.sleepy.hmmusicbox.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.RequiredArgsConstructor;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.util.EntityUtils;
 import org.sleepy.hmmusicbox.dao.TalkDao;
 import org.sleepy.hmmusicbox.mapper.TalkMapper;
 import org.sleepy.hmmusicbox.pojo.entity.TalkEntity;
@@ -12,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -23,58 +32,41 @@ import java.util.List;
 public class TalkServiceImpl implements TalkService {
     private final TalkDao talkDao;
     private final UserService userService;
+
     @Override
-    public void talk(String input, String username) {
-        TalkMapper mapper = TalkMapper.INSTANCE;
-        try {
-            URL url = new URL("http://10.58.0.2:6678/v1/chat/completions");
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-
-            // 设置请求方法为 POST
-            con.setRequestMethod("POST");
-
-            // 设置请求头
-            con.setRequestProperty("Content-Type", "application/json");
-            con.setRequestProperty("Authorization", "Bearer some_key");
-
-            // 启用输入输出
-            con.setDoOutput(true);
-            con.setDoInput(true);
-
-            // 构建请求体数据
-            String jsonInputString = "{ \"model\": \"ChatGLM3-6B\", \"max_tokens\": 2048, \"top_p\": 1, \"temperature\": 1, \"messages\": [ { \"role\": \"system\", \"content\": \"You are a helpful assistant.\" }, { \"role\": \"user\", \"content\": \"" + input + "\" } ] }";
-
-            // 发送请求
-            try (DataOutputStream wr = new DataOutputStream(con.getOutputStream())) {
-//                TalkEntity talkEntity = TalkEntity.builder().content(input).sender(username).build();
-                userService.addTalkHistory(username, input);
-//                talkDao.save(talkEntity);
-                wr.write(jsonInputString.getBytes());
-            }
-
-            // 读取响应
-            try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
-                String inputLine;
-                StringBuilder response = new StringBuilder();
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-//                // 读取错误响应
-//                try (BufferedReader errorIn = new BufferedReader(new InputStreamReader(con.getErrorStream()))) {
-//                    String line;
-//                    StringBuilder errorResponse = new StringBuilder();
-//                    while ((line = errorIn.readLine()) != null) {
-//                        errorResponse.append(line);
-//                    }
-//                    System.out.println("Error response: " + errorResponse.toString());
-//                }
-
-                con.disconnect();
-                userService.addTalkHistory("ChatGLM3-6B", response.toString());
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    public String talk(String input) throws IOException {
+//        1、创建HttpClient对象
+        HttpClient httpClient = HttpClientBuilder.create().build();
+//        2、创建请求方式的实例
+        HttpPost httpPost = new HttpPost("http://10.58.0.2:6678/v1/chat/completions");
+//        3、添加请求参数(设置请求和传输超时时间)
+        RequestConfig requestConfig = RequestConfig.custom().setSocketTimeout(60000).setConnectTimeout(60000).build();
+        httpPost.setConfig(requestConfig);
+        httpPost.setHeader("Accept", "application/json");
+        httpPost.setHeader("Content-Type", "application/json");
+//        设置请求参数
+        String prompt = "下面几首是我喜欢的歌，你能给我推荐更多吗？";
+        input = prompt + input;
+        String jsonInputString = "{ \"model\": \"ChatGLM3-6B\", \"max_tokens\": 2048, \"top_p\": 1, \"temperature\": 1, \"messages\": [ { \"role\": \"user\", \"content\": \"" + input + "\" } ] }";
+        httpPost.setEntity(new StringEntity(jsonInputString, "UTF-8"));
+//        4、发送Http请求
+        HttpResponse response = httpClient.execute(httpPost);
+//        5、获取返回的内容
+        String result = null;
+        int statusCode = response.getStatusLine().getStatusCode();
+        if (200 == statusCode) {
+            result = EntityUtils.toString(response.getEntity());
+        } else {
+            return null;
         }
+//        6、释放资源
+        httpPost.abort();
+        httpClient.getConnectionManager().shutdown();
+        JSONObject object = JSONObject.parseObject(result);
+        return object.getJSONArray("choices")
+                .getJSONObject(0)
+                .getJSONObject("message")
+                .get("content").toString();
     }
+
 }
