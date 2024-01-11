@@ -80,5 +80,10 @@ public class UserEntity {
             inverseJoinColumns = @JoinColumn(name = "music_id"))
     private List<MusicEntity> history = new ArrayList<>();
 
-
+    @ManyToMany
+    @JoinTable(
+            name = "talk_history",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "talk_id"))
+    private List<TalkEntity> talkHistory = new ArrayList<>();
 }

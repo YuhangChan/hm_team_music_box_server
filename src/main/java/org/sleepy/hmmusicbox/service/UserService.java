@@ -1,6 +1,7 @@
 package org.sleepy.hmmusicbox.service;
 
 import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
+import org.sleepy.hmmusicbox.pojo.vo.talk.TalkVO;
 import org.sleepy.hmmusicbox.pojo.vo.user.UserVO;
 
 import java.util.List;
@@ -31,6 +32,9 @@ public interface UserService {
     Set<MusicVO> getLikes(String username);
 
     List<MusicVO> getHistory(String username);
+    List<TalkVO> getTalkHistory(String username);
+    void addTalkHistory(String username, String content);
+
 
     //TODO:获取关注获取粉丝列表？
 }
