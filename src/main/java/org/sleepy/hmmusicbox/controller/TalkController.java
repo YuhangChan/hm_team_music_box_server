@@ -1,6 +1,8 @@
 package org.sleepy.hmmusicbox.controller;
 
 import cn.dev33.satoken.stp.StpUtil;
+import com.alibaba.dashscope.exception.InputRequiredException;
+import com.alibaba.dashscope.exception.NoApiKeyException;
 import lombok.RequiredArgsConstructor;
 import org.sleepy.hmmusicbox.exception.BizException;
 import org.sleepy.hmmusicbox.exception.CommonErrorType;
@@ -23,7 +25,7 @@ public class TalkController {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.OK)
-    public String talk(@RequestBody TalkVO talkVO) throws IOException {
-        return talkService.talk(talkVO.getText());
+    public String talk(@RequestBody TalkVO talkVO) throws NoApiKeyException, InputRequiredException {
+        return talkService.callWithMessage(talkVO.getText());
     }
 }

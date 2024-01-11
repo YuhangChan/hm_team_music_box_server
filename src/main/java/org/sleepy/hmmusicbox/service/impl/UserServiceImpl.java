@@ -9,7 +9,6 @@ import org.sleepy.hmmusicbox.exception.CommonErrorType;
 import org.sleepy.hmmusicbox.mapper.MusicMapper;
 import org.sleepy.hmmusicbox.mapper.TalkMapper;
 import org.sleepy.hmmusicbox.pojo.entity.MusicEntity;
-import org.sleepy.hmmusicbox.pojo.entity.TalkEntity;
 import org.sleepy.hmmusicbox.pojo.entity.UserEntity;
 import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
 import org.sleepy.hmmusicbox.pojo.vo.talk.TalkVO;
