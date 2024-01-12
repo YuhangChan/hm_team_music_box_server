@@ -11,6 +11,7 @@ import org.sleepy.hmmusicbox.pojo.entity.MusicEntityDTO;
 import org.sleepy.hmmusicbox.pojo.vo.music.MusicDTOVO;
 import org.sleepy.hmmusicbox.pojo.vo.music.MusicVO;
 import org.sleepy.hmmusicbox.service.MusicService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class MusicServiceImpl implements MusicService {
     }
 
     @Override
+    @Cacheable(value = "musicCache")
     public List<MusicDTOVO> searchMusic(String name) {
         MusicDTOMapper mapper = MusicDTOMapper.INSTANCE;
         List<MusicEntityDTO> searchResult = musicDao.findByKeyword(name);
