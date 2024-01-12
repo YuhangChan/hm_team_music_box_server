@@ -29,7 +29,7 @@ public class TalkServiceImpl implements TalkService {
         msgManager.add(systemMsg);
         msgManager.add(userMsg);
         QwenParam param =
-                QwenParam.builder().model(Generation.Models.QWEN_PLUS).messages(msgManager.get())
+                QwenParam.builder().model(Generation.Models.QWEN_MAX).messages(msgManager.get())
                         .resultFormat(QwenParam.ResultFormat.MESSAGE)
                         .topP(0.8)
                         .enableSearch(true)
