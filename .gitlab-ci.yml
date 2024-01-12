@@ -60,5 +60,5 @@ deploy-job:      # This job runs in the deploy stage.
   environment: production
   script:
     - sshpass -p "MbVF8mG1MrY4" scp -o StrictHostKeyChecking=no target/hmmusicbox-0.0.1-SNAPSHOT.jar root@47.115.224.143:~/hm_team_music_box_server
-    - sshpass -p "MbVF8mG1MrY4" ssh -o StrictHostKeyChecking=no root@47.115.224.143 "killall java;screen -d -m java -jar hm_team_music_box_server/hmmusicbox-0.0.1-SNAPSHOT.jar"
+    - sshpass -p "MbVF8mG1MrY4" ssh -o StrictHostKeyChecking=no root@47.115.224.143 "killall java;export DASHSCOPE_API_KEY=sk-425f4e2e311140c99bce84d8733a0da4;screen -d -m java -jar hm_team_music_box_server/hmmusicbox-0.0.1-SNAPSHOT.jar"
 
