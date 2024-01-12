@@ -19,7 +19,7 @@ public class TalkServiceImpl implements TalkService {
     @Override
     public String callWithMessage(String input)
             throws NoApiKeyException, ApiException, InputRequiredException {
-        String prompt = "下面几首是我喜欢的歌，你能给我推荐更多吗？";
+        String prompt = "下面几首是我喜欢的歌，请据此给我推荐更多歌曲：";
         input = prompt + input;
         Generation gen = new Generation();
         MessageManager msgManager = new MessageManager(10);
