@@ -36,7 +36,7 @@ public class MusicServiceImpl implements MusicService {
     }
 
     @Override
-    @Cacheable(value = "musicCache")
+    @Cacheable(value = "musicSearchCache")
     public List<MusicDTOVO> searchMusic(String name) {
         MusicDTOMapper mapper = MusicDTOMapper.INSTANCE;
         List<MusicEntityDTO> searchResult = musicDao.findByKeyword(name);
@@ -49,6 +49,7 @@ public class MusicServiceImpl implements MusicService {
     }
 
     @Override
+    @Cacheable(value = "musicDetailCache")
     public MusicVO getMusicDetail(Long id) {
         MusicMapper mapper = MusicMapper.INSTANCE;
         return mapper.toMusicVO(musicDao.findByIdIs(id));
