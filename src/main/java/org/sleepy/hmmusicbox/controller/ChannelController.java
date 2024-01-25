@@ -23,7 +23,6 @@ import java.util.List;
 public class ChannelController {
     private final ChannelService channelService;
     private final PostService postService;
-    private final UserService userService;
 
 
     @GetMapping("/search/{name}")
